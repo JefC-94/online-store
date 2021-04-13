@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {axiosObject} from '../../Constants';
 import ProductItem from './ProductItem';
 
@@ -15,8 +15,7 @@ function ProductList() {
     }, []);
 
     async function getProducts(){
-        const request = await axiosObject('/product?join=del_order_item');
-        //console.log(request.data);
+        const request = await axiosObject('/product?join=del_order_item');        
         setProducts(request.data.records);
     }
 

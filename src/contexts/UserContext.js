@@ -18,7 +18,7 @@ function UserContextProvider(props) {
 
     const logoutUser = () => {
         localStorage.removeItem('loginToken');
-        setRootState(prevValue => ({...prevValue, isAuth:false}));
+        setRootState(prevValue => ({theUser:null, isAuth:false}));
         isLoggedIn();
     }
 
@@ -63,19 +63,18 @@ function UserContextProvider(props) {
 
             if(data.success && data.user){
                 setRootState(prevValue => ({...prevValue, isAuth:true,theUser:data.user}));
-                console.log("user is logged in");
             }
         }
     }
 
     return (
         <UserContext.Provider value={{
-            rootState : rootState,
-            isLoggedIn : isLoggedIn,
-            registerUser: registerUser,
-            loginUser: loginUser,
-            logoutUser: logoutUser,
-            editUser: editUser
+            rootState,
+            isLoggedIn,
+            registerUser,
+            loginUser,
+            logoutUser,
+            editUser
         }}>
             {props.children}
         </UserContext.Provider>

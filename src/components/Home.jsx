@@ -6,7 +6,6 @@ import About from './About';
 import Footer from './Footer';
 import Header from './Header';
 import ProductDetail from './store/ProductDetail';
-import {CartContext} from '../contexts/CartContext';
 
 //Protected directory, cart/checkout is not accessible unless authenticated user
 /* function PrivateRoute({component: Component, path, ...rest}){
@@ -24,8 +23,6 @@ import {CartContext} from '../contexts/CartContext';
 
 function Home(){
     
-    const {orderId} = useContext(CartContext);
-
     return (
         <>
         
@@ -45,7 +42,6 @@ function Home(){
                 <Route path='/store' component={Store} />
                 <Route path='/product/:id' component={ProductDetail} />
             </Switch>
-            {orderId}
             <Footer></Footer>
         
         </>

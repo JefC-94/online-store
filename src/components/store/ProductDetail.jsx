@@ -8,8 +8,8 @@ function ProductDetail() {
     const {id} = useParams();
 
     const [product, setProduct] = useState({});
-    const [count, setCount] = useState();
-    const {orderId} = useContext(CartContext);
+    const [item, setItem] = useState();
+    const {orderId, cartItems, addCartItem, minusCartItem, plusCartItem} = useContext(CartContext);
 
     useEffect(() => {
         getProduct();
@@ -17,26 +17,27 @@ function ProductDetail() {
     }, []);
 
     useEffect(() => {
-        getCount();
+        if(cartItems){
+            getItem();
+        }
         return () => {
-            setCount();
+            setItem();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderId, product]);
+    }, [orderId, product, cartItems]);
 
     async function getProduct(){
         const request = await axiosObject(`/product/${id}`);
-        console.log(request.data);
         setProduct(request.data);
     }
 
-    async function getCount(){
-        const request = await axiosObject(`del_order_item?filter=order_id,eq,${orderId}&filter=product_id,eq,${product.id}`);
-        const selOrderItem = request.data.records[0];
-        if(selOrderItem){
-            setCount(selOrderItem.count);
+    async function getItem(){
+        //Instead of checking database, check the items of the users cart to see if the product is in it. This should be faster than checking the entire sel_order_item table
+        const match = cartItems.filter(el => el.product_id === product.id)[0];
+        if(match){
+            setItem(match);
         } else {
-            setCount(0);
+            setItem({count: 0});
         }
     }
 
@@ -52,11 +53,12 @@ function ProductDetail() {
                     {/* <p className="description">{product.description.substring(0,100)}...</p> */}
                 </div>
                 <div className="list-item-extra">
-                    {count === 0 && <button className="button primary">Add to cart</button>}
-                    {count > 0 && <div className="">
-                        {count}
+                    {item && item.count === 0 && <button className="button primary" onClick={() => addCartItem(product.id)}>Add to cart</button>}
+                    {item && item.count > 0 && <div className="">
+                        <button onClick={() => minusCartItem(item)}>-</button>
+                        {item.count}
+                        <button onClick={() => plusCartItem(item)}>+</button>
                     </div>}
-                    
                 </div>
             </div>
         </div>
