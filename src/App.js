@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import './scss/style.scss';
+import React, {useContext, useEffect} from 'react';
+import UserContextProvider from './contexts/UserContext';
+
+import {WindowContext} from './contexts/WindowContext';
+import WindowContextProvider from './contexts/WindowContext';
+//import SocketProvider from './contexts/SocketContext';
+import Home from './components/Home';
+import Footer from './components/Footer';
+import {BrowserRouter} from 'react-router-dom';
 
 function App() {
+  const {changeWindowWidth} = useContext(WindowContext);
+
+  const updateDimensions = () => {
+    const width = window.innerWidth;
+    changeWindowWidth(width);
+  }
+
+  useEffect(() => {
+    updateDimensions();
+
+    window.addEventListener("resize", updateDimensions);
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <UserContextProvider>
+        <Home />
+        
+      </UserContextProvider>
+    </BrowserRouter>
   );
 }
 
-export default App;
+function AppWrapper(){
+  return (
+    <WindowContextProvider>
+        <App />
+    </WindowContextProvider>
+  )
+}
+
+export default AppWrapper;

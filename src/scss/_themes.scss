@@ -1,0 +1,117 @@
+// TITLE STYLING
+
+h1{
+    font-size:28px;
+    font-weight:600;
+}
+
+h2{
+    font-size:20px;
+}
+
+@media screen and (max-width:$smallscreen){
+
+    h1{
+        font-size:24px;
+        line-height:1.1;
+    }
+
+    h2{
+        font-size:18px;
+    }
+}
+
+//PARAGRAPH STYLING
+
+p{
+    font-size:1em;
+    color:var(--primaryTextColor);
+}
+
+p.error{
+    color:rgb(185, 19, 19);
+}
+
+p.success{
+    font-weight:bold;
+    color:rgb(16, 122, 16);
+}
+
+//SOME BUTTON AND INPUT STYLING
+
+a, button{
+    font-family: $hoofdfont, sans-serif;
+    font: var(--hoofdfont);
+    color:var(--primaryTextColor);
+}
+
+a.button, button.button{
+    height:40px;
+    border-radius:0px;
+    font-weight:700;
+    padding:0 1em;
+    text-align:center;
+    font-size:14px;
+    line-height:35px;
+    transition:background-color .2s ease;
+    cursor:pointer;
+}
+
+button.button{
+    line-height:1;
+}
+
+button.flex{
+    @include flex(row, center, center);
+}
+
+a.circle, button.circle{
+    width:40px;
+    height:40px;
+    font-weight:700;
+    border-radius:50%;
+    transition:background-color .2s ease;
+}
+
+a.primary, button.primary{
+    background-color:var(--accentColor);
+    color:white;
+    transition:background-color .2s ease;
+
+    &:hover{
+        background-color:var(--accentDarkColor);
+    }
+}
+
+a.secondary, button.secondary{
+    background-color:rgb(228, 228, 228);
+    color:var(--primaryTextColor);
+
+    &:hover{
+        background:rgb(211, 211, 211);
+    }
+}
+
+a.white, button.white{
+    background-color:var(--primaryBgColor);
+    color:var(--accentColor);
+
+    &:hover{
+        background-color:rgb(241, 241, 241);
+    }
+}
+
+a.link, button.link{
+    text-decoration:underline;
+    background:none;
+
+    &:hover{
+        color:var(--accentColor);
+    }
+}
+
+a.arrow, button.arrow{
+    background:none;
+    font-size:1.4em;
+    line-height:1;
+}
