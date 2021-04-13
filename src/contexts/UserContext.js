@@ -19,7 +19,7 @@ function UserContextProvider(props) {
     const logoutUser = () => {
         localStorage.removeItem('loginToken');
         setRootState(prevValue => ({...prevValue, isAuth:false}));
-        
+        isLoggedIn();
     }
 
     const registerUser = async (user) => {
@@ -63,6 +63,7 @@ function UserContextProvider(props) {
 
             if(data.success && data.user){
                 setRootState(prevValue => ({...prevValue, isAuth:true,theUser:data.user}));
+                console.log("user is logged in");
             }
         }
     }

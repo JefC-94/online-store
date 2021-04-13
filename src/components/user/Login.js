@@ -12,11 +12,6 @@ function Login({setShowLogin}){
         password:'',
     }
 
-    const demoUser = {
-        email:'steve@hotmail.com',
-        password:'azertyui',
-    }
-
     const [userInfo,setUserInfo] = useState(initialState);
 
     const [error, setError] = useState(false);
@@ -61,14 +56,6 @@ function Login({setShowLogin}){
                 type: JSON.parse(data.message).type,
                 message: JSON.parse(data.message).message
             });
-        }
-    }
-
-    const demoLogin = async () => {
-        const data = await loginUser(demoUser);
-        if(data.success && data.token){
-            localStorage.setItem('loginToken', data.token);
-            await isLoggedIn();
         }
     }
 

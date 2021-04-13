@@ -1,11 +1,12 @@
 import React, {useContext} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import {UserContext} from '../contexts/UserContext';
 import Store from './Store';
 import Lobby from './Lobby';
 import About from './About';
 import Footer from './Footer';
 import Header from './Header';
+import ProductDetail from './store/ProductDetail';
+import {CartContext} from '../contexts/CartContext';
 
 //Protected directory, cart/checkout is not accessible unless authenticated user
 /* function PrivateRoute({component: Component, path, ...rest}){
@@ -22,11 +23,12 @@ import Header from './Header';
 }; */
 
 function Home(){
-    const {rootState} = useContext(UserContext);
-    const {isAuth} = rootState;
+    
+    const {orderId} = useContext(CartContext);
 
     return (
         <>
+        
             <Header></Header>
             <Switch>
                 <Route
@@ -41,8 +43,11 @@ function Home(){
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/about' component={About} />
                 <Route path='/store' component={Store} />
+                <Route path='/product/:id' component={ProductDetail} />
             </Switch>
+            {orderId}
             <Footer></Footer>
+        
         </>
     )
 }

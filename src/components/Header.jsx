@@ -10,14 +10,14 @@ function Header() {
     return (
         <header>
             <div className="container">
-            <p>Online Store</p>
+            <Link to="/store">Online Store</Link>
 
             {isAuth && <div>
                 {theUser.username}
                 <button className="button primary" id="logoutBtn" onClick={logoutUser}>Logout</button>
             </div>}
-            {!isAuth && <Link className="button" to="lobby">Login</Link>}
-            </div>
+            {!isAuth && <Link className="button" to="/lobby">Login</Link>}
+            </div>            
         </header>
     )
 }

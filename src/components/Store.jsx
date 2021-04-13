@@ -1,16 +1,13 @@
-import React, {useContext} from 'react';
-import {UserContext} from '../contexts/UserContext';
+import React from 'react';
+import ProductList from './store/ProductList';
 
 function Store() {
-
-    const {rootState, logoutUser} = useContext(UserContext);
-    const {theUser} = rootState;
 
     return (
         <>
             <main className="container store-main">
                 <div className="store-container">
-                    Products products products!
+                    <ProductList />
                 </div>
             </main>
         </>

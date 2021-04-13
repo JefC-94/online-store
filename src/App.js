@@ -1,12 +1,10 @@
 import './scss/style.scss';
 import React, {useContext, useEffect} from 'react';
 import UserContextProvider from './contexts/UserContext';
-
-import {WindowContext} from './contexts/WindowContext';
 import WindowContextProvider from './contexts/WindowContext';
-//import SocketProvider from './contexts/SocketContext';
+import CartContextProvider from './contexts/CartContext';
 import Home from './components/Home';
-import Footer from './components/Footer';
+import {WindowContext} from './contexts/WindowContext';
 import {BrowserRouter} from 'react-router-dom';
 
 function App() {
@@ -29,10 +27,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UserContextProvider>
-        <Home />
-        
-      </UserContextProvider>
+      <CartContextProvider>
+          <Home />
+      </CartContextProvider>
     </BrowserRouter>
   );
 }
@@ -40,7 +37,9 @@ function App() {
 function AppWrapper(){
   return (
     <WindowContextProvider>
+      <UserContextProvider>
         <App />
+      </UserContextProvider>
     </WindowContextProvider>
   )
 }
