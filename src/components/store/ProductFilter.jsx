@@ -7,6 +7,17 @@ function ProductFilter() {
     return (
         <div className="product-filter">
             <div className="filter-wrap">
+                <div className="select">
+                    <select>
+                        <option value="" disabled>Sort by</option>
+                        <option>Price - Lowest to Highest</option>
+                        <option>Price - Highest to Lowest</option>
+                        <option>Alphabet - A-Z</option>
+                        <option>Alphabet - Z-A</option>
+                    </select>
+                </div>
+            </div>
+            <div className="filter-wrap">
                 <h3>Search by name</h3>
                 <div className="filter-control">
                     <input type="text" />

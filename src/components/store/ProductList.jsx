@@ -7,11 +7,13 @@ function ProductList() {
     const {products} = useContext(CartContext);
 
     return (
+        <>
         <div className="product-list">
             {products && products.map(product => {
                 return <ProductItem key={product.id} product={product} />
             })}
         </div>
+        </>
     )
 }
 

@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Header from './Header';
 import ProductDetail from './store/ProductDetail';
 import Checkout from './checkout/Checkout';
+import {BrowserRouter} from 'react-router-dom';
 
 //Protected directory, cart/checkout is not accessible unless authenticated user
 function PrivateRoute({component: Component, path, ...rest}){
@@ -27,7 +28,7 @@ function Home(){
     
     return (
         <>
-        
+        <BrowserRouter>
             <Header></Header>
             <Switch>
                 <Route
@@ -46,7 +47,7 @@ function Home(){
                 <Route path='/product/:id' component={ProductDetail} />
             </Switch>
             <Footer></Footer>
-        
+        </BrowserRouter>
         </>
     )
 }

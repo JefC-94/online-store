@@ -1,47 +1,36 @@
 import './scss/style.scss';
-import React, {useContext, useEffect} from 'react';
-import UserContextProvider from './contexts/UserContext';
-import WindowContextProvider from './contexts/WindowContext';
+import React, {Component} from 'react';
 import CartContextProvider from './contexts/CartContext';
 import Home from './components/Home';
-import {WindowContext} from './contexts/WindowContext';
-import {BrowserRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function App() {
-  const {changeWindowWidth} = useContext(WindowContext);
+class App extends Component{
+  
+  componentDidMount() {
+    //this.props.loadData();
+}
 
-  const updateDimensions = () => {
-    const width = window.innerWidth;
-    changeWindowWidth(width);
-  }
-
-  useEffect(() => {
-    updateDimensions();
-
-    window.addEventListener("resize", updateDimensions);
-
-    return () => {
-      window.removeEventListener("resize", updateDimensions);
-    }
-  })
-
-  return (
-    <BrowserRouter>
+  render(){
+    return (
       <CartContextProvider>
-          <Home />
+        <button onClick={this.props.loadData}>Get Products</button>
+        <div>
+          This is a test for the redux store.
+          {JSON.stringify(this.props.state)}
+        </div>
       </CartContextProvider>
-    </BrowserRouter>
-  );
+    );
+  }
 }
 
-function AppWrapper(){
-  return (
-    <WindowContextProvider>
-      <UserContextProvider>
-        <App />
-      </UserContextProvider>
-    </WindowContextProvider>
-  )
+const mapStateToProps = (state) => {
+  return {state}
 }
 
-export default AppWrapper;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadData: () => dispatch({type: "LOAD_DATA"}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
