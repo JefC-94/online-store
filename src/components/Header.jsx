@@ -12,6 +12,9 @@ function Header() {
             <div className="container">
             <Link to="/store">Online Store</Link>
 
+            <div className="navbar">
+                <Link to="/checkout">Checkout</Link>
+            </div>
             {isAuth && <div>
                 {theUser.username}
                 <button className="button primary" id="logoutBtn" onClick={logoutUser}>Logout</button>

@@ -3,6 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import {CartContext} from '../../contexts/CartContext';
 import {UserContext} from '../../contexts/UserContext';
 import {axiosObject} from '../../Constants';
+import {imgPath} from '../../Constants';
 
 function ProductDetail() {
 
@@ -51,7 +52,7 @@ function ProductDetail() {
 
     async function getItem(){
         //Instead of checking database, check the items of the users cart to see if the product is in it. This should be faster than checking the entire sel_order_item table
-        const match = cartItems.filter(el => el.product_id === product.id)[0];
+        const match = cartItems.filter(el => el.product_id.id === product.id)[0];
         if(match){
             setItem(match);
         } else {
@@ -64,13 +65,14 @@ function ProductDetail() {
         <Link to="/store">Back to all products</Link>
         {product && 
         <div className="product-list-item" key={product.id} >
-            <img src={product.photo_url} alt={product.name} />
+            <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
             <div className="list-item-info">
                 <div className="list-item-content">
                     <p>{product.name}</p>
                     {/* <p className="description">{product.description.substring(0,100)}...</p> */}
                 </div>
                 <div className="list-item-extra">
+                   
                     {!item && <Link className="button primary" to="lobby">Add to cart</Link>}
                     {item && item.count === 0 && <button className="button primary" onClick={() => {
                         addCartItem(product.id)

@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductFilter from './store/ProductFilter';
 import ProductList from './store/ProductList';
 
 function Store() {
@@ -7,6 +8,7 @@ function Store() {
         <>
             <main className="container store-main">
                 <div className="store-container">
+                    <ProductFilter />
                     <ProductList />
                 </div>
             </main>

@@ -8,12 +8,12 @@ function CartContextProvider(props) {
 
     const [orderId, setOrderId] = useState();
     //should be undefined instead of empty array: better for product item count showing
-    const [cartItems, setCartItems] = useState();
+    const [cartItems, setCartItems] = useState([]);
 
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
-    const [products, setProducts] = useState([]);    
+    const [products, setProducts] = useState();    
 
     useEffect(() => {
         getProducts();
@@ -40,7 +40,7 @@ function CartContextProvider(props) {
     }, [theUser]);
 
     async function getCartItems(){
-        const request = await axiosObject.get(`/del_order?join=del_order_item&filter=user_id,eq,${theUser.id}`);
+        const request = await axiosObject.get(`/del_order?join=del_order_item,product&filter=user_id,eq,${theUser.id}`);
         setOrderId(request.data.records[0].id);
         setCartItems(request.data.records[0].del_order_item);
     }
