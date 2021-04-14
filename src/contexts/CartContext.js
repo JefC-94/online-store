@@ -13,16 +13,28 @@ function CartContextProvider(props) {
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
+    const [products, setProducts] = useState([]);    
+
     useEffect(() => {
-        console.log("hello");
+        getProducts();
+        return () => {
+            setProducts([]);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    async function getProducts(){
+        const request = await axiosObject('/product?join=del_order_item');        
+        setProducts(request.data.records);
+    }
+
+    useEffect(() => {
         if(theUser){
             getCartItems();
         } else {
             setOrderId()
-            //THIS LINE MAKES THE DIFFERENCE:
-            // empty array means short flash on counts of items
-            // nothing means that visitors can't click on add to cart
-            setCartItems([]);
+            //important for the display of item counts
+            setCartItems();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [theUser]);
@@ -63,8 +75,8 @@ function CartContextProvider(props) {
 
     return (
         <CartContext.Provider value={{
-            orderId,
             cartItems,
+            products,
             addCartItem,
             plusCartItem,
             minusCartItem,

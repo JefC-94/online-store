@@ -1,15 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import {CartContext} from '../../contexts/CartContext';
+import {UserContext} from '../../contexts/UserContext';
 import {axiosObject} from '../../Constants';
 
 function ProductDetail() {
 
     const {id} = useParams();
 
+    const {rootState} = useContext(UserContext);
+    const {theUser} = rootState;
+
     const [product, setProduct] = useState({});
     const [item, setItem] = useState();
-    const {orderId, cartItems, addCartItem, minusCartItem, plusCartItem} = useContext(CartContext);
+    const {cartItems, addCartItem, minusCartItem, plusCartItem} = useContext(CartContext);
 
     useEffect(() => {
         getProduct();
@@ -17,14 +21,28 @@ function ProductDetail() {
     }, []);
 
     useEffect(() => {
+        //Three options:
+        /**
+         * No user, no cartItems -> set "add to cart" buttons as links to login page
+         * User, but no cartItems -> set all items with count = 0
+         * User, at least one cartItem -> set all items individually in function
+         */
+         if(!cartItems && !theUser){
+            setItem();
+            return;
+        }
+        if(!cartItems){
+            setItem({count: 0});
+            return;
+        }
         if(cartItems){
             getItem();
         }
-        return () => {
-            setItem();
-        }
+            return () => {
+                setItem();
+            }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orderId, product, cartItems]);
+    }, [product, cartItems]);
 
     async function getProduct(){
         const request = await axiosObject(`/product/${id}`);
@@ -42,7 +60,7 @@ function ProductDetail() {
     }
 
     return (
-        <>
+        <main>
         <Link to="/store">Back to all products</Link>
         {product && 
         <div className="product-list-item" key={product.id} >
@@ -53,7 +71,11 @@ function ProductDetail() {
                     {/* <p className="description">{product.description.substring(0,100)}...</p> */}
                 </div>
                 <div className="list-item-extra">
-                    {item && item.count === 0 && <button className="button primary" onClick={() => addCartItem(product.id)}>Add to cart</button>}
+                    {!item && <Link className="button primary" to="lobby">Add to cart</Link>}
+                    {item && item.count === 0 && <button className="button primary" onClick={() => {
+                        addCartItem(product.id)
+                        }
+                    }>Add to cart</button>}
                     {item && item.count > 0 && <div className="">
                         <button onClick={() => minusCartItem(item)}>-</button>
                         {item.count}
@@ -63,7 +85,7 @@ function ProductDetail() {
             </div>
         </div>
         }
-        </>
+        </main>
     )
 }
 

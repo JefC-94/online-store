@@ -8,7 +8,7 @@ function Lobby() {
     const [showLogin, setShowLogin] = useState(true);
     
     const demoUser = {
-        email:'steve@hotmail.com',
+        email:'john@hotmail.com',
         password:'azertyui',
     }
 
