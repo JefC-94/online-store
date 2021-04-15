@@ -11,7 +11,7 @@ import Checkout from './checkout/Checkout';
 import {BrowserRouter} from 'react-router-dom';
 
 //Protected directory, cart/checkout is not accessible unless authenticated user
-function PrivateRoute({component: Component, path, ...rest}){
+/* function PrivateRoute({component: Component, path, ...rest}){
     const {rootState} = useContext(UserContext);
     const {isAuth} = rootState;
     
@@ -22,7 +22,7 @@ function PrivateRoute({component: Component, path, ...rest}){
             : (<Redirect to='/lobby' />)
         )} />
     );
-};
+}; */
 
 function Home(){
     
@@ -43,7 +43,7 @@ function Home(){
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/about' component={About} />
                 <Route path='/store' component={Store} />
-                <PrivateRoute path='/checkout' component={Checkout} />
+                <Route path='/checkout' component={Checkout} />
                 <Route path='/product/:id' component={ProductDetail} />
             </Switch>
             <Footer></Footer>

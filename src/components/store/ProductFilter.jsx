@@ -31,6 +31,7 @@ function ProductFilter() {
 
     useEffect(() => {
         sortAndFilter(filters);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     useEffect(() => {
@@ -62,9 +63,10 @@ function ProductFilter() {
     return (
         <div className="product-filter">
             <div className="filter-wrap">
-                <div className="select">
+                <h3>Sortering</h3>
+                <div className="filter-control">
                     <select value={filters.sorting} onChange={(e) => setFilters(prevVal => ({...prevVal, sorting: e.target.value}))}>
-                        <option value="" disabled>Sort by</option>
+                        <option value="">Sort by</option>
                         <option value="PRICE_ASC">Price - Lowest to Highest</option>
                         <option value="PRICE_DESC">Price - Highest to Lowest</option>
                         <option value="ALPHA_ASC">Alphabet - A-Z</option>
@@ -73,13 +75,13 @@ function ProductFilter() {
                 </div>
             </div>
             <div className="filter-wrap">
-                <h3>Search by name</h3>
+                <h3>Zoek op naam</h3>
                 <div className="filter-control">
                     <input type="text" value={inputField} onChange={(e) => setInputField(e.target.value)} />
                 </div>
             </div>
             <div className="filter-wrap">
-                <h3>Brands</h3>
+                <h3>Merk</h3>
                 {brands && brands.map(brand => {
                     return (
                         <div key={brand.id} className="filter-control">
@@ -90,7 +92,7 @@ function ProductFilter() {
                 })}                
             </div>
             <div className="filter-wrap">
-                <h3>Category</h3>
+                <h3>Categorie</h3>
                 {categories && categories.map(category => {
                     return (
                         <div key={category.id} className="filter-control">
@@ -100,7 +102,7 @@ function ProductFilter() {
                     )
                 })}
             </div>
-            {JSON.stringify(filters)}
+            {/* {JSON.stringify(filters)} */}
         </div>
     )
 }

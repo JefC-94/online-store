@@ -12,7 +12,7 @@ function ProductItem({product}) {
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
-    const {cartItems, addCartItem, plusCartItem, minusCartItem} = useContext(CartContext);
+    const {cartItems, addCartItem, plusCartItem, minusCartItem, createCart} = useContext(CartContext);
 
     useEffect(() => {
         //Three options:
@@ -60,8 +60,8 @@ function ProductItem({product}) {
                     <div className="price-wrap">
                         <p className="price">{product.price}</p>
                     </div>                    
-                    {!item && <Link className="button primary" to="lobby">Add to cart</Link>}
-                    {item && item.count === 0 && <button className="button primary" onClick={() => addCartItem(product.id)}>Add to cart</button>}
+                    {/* {!item && <button className="button primary center" onClick={() => createCart(product.id)}>Add to cart</button>} */}
+                    {item && item.count === 0 && <button className="button primary center" onClick={() => addCartItem(product.id)}>Add to cart</button>}
                     {item && item.count > 0 && <div className="count-options">
                         <div className="added">Added to cart &nbsp;<FaCheck /></div>
                         <p className="count">{item.count}</p>

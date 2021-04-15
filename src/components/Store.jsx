@@ -7,10 +7,10 @@ function Store() {
     return (
         <>
             <main className="container store-main">
-                <div className="store-container">
-                    <ProductFilter />
-                    <ProductList />
-                </div>
+                
+                <ProductFilter />
+                <ProductList />
+                
             </main>
         </>
     )

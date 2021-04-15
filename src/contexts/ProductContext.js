@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect, useReducer} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import {axiosObject} from '../Constants';
 
 export const ProductContext = createContext();
@@ -70,6 +70,7 @@ function ProductContextProvider(props) {
             if(sorting === "ALPHA_DESC"){
                 return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
             }
+            return a - b;
         })
         ])
     }

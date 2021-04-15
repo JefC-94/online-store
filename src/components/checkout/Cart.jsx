@@ -1,10 +1,9 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import { CartContext } from '../../contexts/CartContext';
-import {Link} from 'react-router-dom';
 
 function Cart() {
 
-    const {cartItems, addCartItem, minusCartItem, plusCartItem} = useContext(CartContext);
+    const {cartItems, minusCartItem, plusCartItem} = useContext(CartContext);
 
     return (
         <div className="cart-container">

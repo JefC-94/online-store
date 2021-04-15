@@ -13,6 +13,10 @@ function CartContextProvider(props) {
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
+    //SPLIT CART FROM USER -> RATHER USE LOCALSTORAGE
+    //when user logs in, he gets the right cart from the database and puts it in localstorage?
+    
+
     useEffect(() => {
         if(theUser){
             getCartItems();
@@ -48,7 +52,7 @@ function CartContextProvider(props) {
 
     async function minusCartItem(item){
         if(item.count === 1){
-            const request = await axiosObject.delete(`del_order_item/${item.id}`);
+            const request = await axiosObject.delete(`/del_order_item/${item.id}`);
             console.log(request.data);
         }
         if(item.count > 1){
@@ -58,12 +62,31 @@ function CartContextProvider(props) {
         getCartItems();
     }
 
+  
+    async function createCart(product_id){
+        const timestamp = Math.floor(new Date().getTime() / 1000 );
+        const request1 = await axiosObject.post(`/del_order`, {
+            user_id: null,
+            created_at: timestamp
+        });
+        const orderId = request1.data;
+        setOrderId(orderId);
+        
+        const request = await axiosObject.post(`/del_order_item`, {
+            order_id: orderId,
+            product_id: product_id,
+            count: 1
+        });
+        console.log(request.data);
+    }
+
     return (
         <CartContext.Provider value={{
             cartItems,
             addCartItem,
             plusCartItem,
             minusCartItem,
+            createCart,
         }}>
             {props.children}
         </CartContext.Provider>
