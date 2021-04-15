@@ -39,7 +39,6 @@ function ProductItem({product}) {
     }, [cartItems]);
 
     async function getItem(){
-        console.log(cartItems);
         //Instead of checking database, check the items of this cart to see if the product is in it. This should be faster than checking the entire sel_order_item table
         const match = cartItems.filter(el => el.product_id.id === product.id)[0];
         if(match){

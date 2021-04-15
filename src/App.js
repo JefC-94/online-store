@@ -1,36 +1,16 @@
 import './scss/style.scss';
-import React, {Component} from 'react';
+import React from 'react';
 import CartContextProvider from './contexts/CartContext';
 import Home from './components/Home';
-import { connect } from 'react-redux';
 
-class App extends Component{
+function App(){
   
-  componentDidMount() {
-    //this.props.loadData();
-}
-
-  render(){
     return (
       <CartContextProvider>
-        <button onClick={this.props.loadData}>Get Products</button>
-        <div>
-          This is a test for the redux store.
-          {JSON.stringify(this.props.state)}
-        </div>
+        <Home />
       </CartContextProvider>
     );
-  }
+
 }
 
-const mapStateToProps = (state) => {
-  return {state}
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadData: () => dispatch({type: "LOAD_DATA"}),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

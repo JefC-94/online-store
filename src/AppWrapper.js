@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import UserContextProvider from './contexts/UserContext';
+import ProductContextProvider from './contexts/ProductContext';
 import {WindowContext} from './contexts/WindowContext';
 import App from './App';
 
@@ -24,7 +25,9 @@ function AppWrapper(){
 
     return (
         <UserContextProvider>
-          <App />
+          <ProductContextProvider>
+            <App />
+          </ProductContextProvider>
         </UserContextProvider>
     )
   }
