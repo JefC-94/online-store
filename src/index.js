@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppWrapper from './AppWrapper';
+import AppWrapper from './App';
 import WindowContextProvider from './contexts/WindowContext';
 
 ReactDOM.render(

@@ -1,4 +1,3 @@
-import reducer from "../store/reducer";
 import React, {createContext, useState, useEffect, useReducer} from 'react';
 import {axiosObject} from '../Constants';
 
