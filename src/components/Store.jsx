@@ -6,11 +6,9 @@ function Store() {
 
     return (
         <>
-            <main className="container store-main">
-                
+            <main className="container store-main"> 
                 <ProductFilter />
                 <ProductList />
-                
             </main>
         </>
     )

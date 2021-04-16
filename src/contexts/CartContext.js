@@ -7,31 +7,48 @@ export const CartContext = createContext();
 function CartContextProvider(props) {
 
     const [orderId, setOrderId] = useState();
-    //should be undefined instead of empty array: better for product item count showing
-    const [cartItems, setCartItems] = useState([]);
+    //Two options for cart:
+    // -> undefined = no cart (no user and no localstorage cart yet)
+    // -> array, either empty or filled with cartItems
+    const [cart, setCart] = useState();
 
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
-    //SPLIT CART FROM USER -> RATHER USE LOCALSTORAGE
-    //when user logs in, he gets the right cart from the database and puts it in localstorage?
-    
-
     useEffect(() => {
         if(theUser){
-            getCartItems();
+            getCartFromUser();
         } else {
-            setOrderId()
-            //important for the display of item counts
-            setCartItems();
+            getCartFromLS();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [theUser]);
 
-    async function getCartItems(){
+    useEffect(() => {
+        if(orderId){
+            getCart();
+        }
+    }, [orderId]);
+
+    async function getCart(){
+        const request = await axiosObject.get(`/del_order/${orderId}?join=del_order_item,product`);
+        setCart(request.data.del_order_item);
+    }
+
+    async function getCartFromUser(){
         const request = await axiosObject.get(`/del_order?join=del_order_item,product&filter=user_id,eq,${theUser.id}`);
         setOrderId(request.data.records[0].id);
-        setCartItems(request.data.records[0].del_order_item);
+    }
+
+    async function getCartFromLS(){
+        if(localStorage.getItem('cart_id')){
+            const cartId = localStorage.getItem('cart_id');
+            const request = await axiosObject.get(`/del_order/${cartId}?join=del_order_item,product`);
+            setOrderId(request.data.id);
+        } else {
+            setOrderId();
+            setCart();
+        }
     }
 
     async function addCartItem(product_id){
@@ -41,13 +58,13 @@ function CartContextProvider(props) {
             count: 1
         });
         console.log(request.data);
-        getCartItems();
+        getCart();
     }
 
     async function plusCartItem(item){
         const request = await axiosObject.put(`/del_order_item/${item.id}`, {count : item.count+1});
         console.log(request.data);
-        getCartItems();
+        getCart();
     }
 
     async function minusCartItem(item){
@@ -59,34 +76,40 @@ function CartContextProvider(props) {
             const request = await axiosObject.put(`/del_order_item/${item.id}`, {count : item.count-1});
             console.log(request.data);
         }
-        getCartItems();
+        getCart();
     }
 
   
     async function createCart(product_id){
+        console.log("create cart!");
         const timestamp = Math.floor(new Date().getTime() / 1000 );
         const request1 = await axiosObject.post(`/del_order`, {
             user_id: null,
             created_at: timestamp
         });
         const orderId = request1.data;
-        setOrderId(orderId);
-        
         const request = await axiosObject.post(`/del_order_item`, {
             order_id: orderId,
             product_id: product_id,
             count: 1
         });
-        console.log(request.data);
+        setOrderId(orderId);
+        localStorage.setItem('cart_id', orderId);
+    }
+
+    async function deleteCart(){
+        //when localstorage cart is empty, delete it
+        //no use keeping track of an empty cart?
     }
 
     return (
         <CartContext.Provider value={{
-            cartItems,
+            cart,
             addCartItem,
             plusCartItem,
             minusCartItem,
             createCart,
+            deleteCart,
         }}>
             {props.children}
         </CartContext.Provider>

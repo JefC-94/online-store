@@ -19,7 +19,7 @@ function ProductContextProvider(props) {
     useEffect(() => {
         if(products){
             setShowedProducts(products);
-            console.log(products);
+            //console.log(products);
         }
         return () => {
             setShowedProducts([]);

@@ -12,35 +12,35 @@ function ProductItem({product}) {
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
-    const {cartItems, addCartItem, plusCartItem, minusCartItem, createCart} = useContext(CartContext);
+    const {cart, addCartItem, plusCartItem, minusCartItem, createCart} = useContext(CartContext);
 
     useEffect(() => {
         //Three options:
         /**
-         * No user, no cartItems -> set "add to cart" buttons as links to login page
-         * User, but no cartItems -> set all items with count = 0
+         * No user, no cart -> set "add to cart" buttons as links to login page
+         * User, but no cart -> set all items with count = 0
          * User, at least one cartItem -> set all items individually in function
          */
-        if(!cartItems && !theUser){
+        if(!cart && !theUser){
             setItem();
             return;
         }
-        if(!cartItems){
+        if(!cart){
             setItem({count: 0});
             return;
         }
-        if(cartItems){
+        if(cart){
             getItem();
         }
         return () => {
             setItem();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cartItems]);
+    }, [cart]);
 
     async function getItem(){
         //Instead of checking database, check the items of this cart to see if the product is in it. This should be faster than checking the entire sel_order_item table
-        const match = cartItems.filter(el => el.product_id.id === product.id)[0];
+        const match = cart.filter(el => el.product_id.id === product.id)[0];
         if(match){
             setItem(match);
         } else {
@@ -60,7 +60,7 @@ function ProductItem({product}) {
                     <div className="price-wrap">
                         <p className="price">{product.price}</p>
                     </div>                    
-                    {/* {!item && <button className="button primary center" onClick={() => createCart(product.id)}>Add to cart</button>} */}
+                    {!item && <button className="button primary center" onClick={() => createCart(product.id)}>Add to cart</button>}
                     {item && item.count === 0 && <button className="button primary center" onClick={() => addCartItem(product.id)}>Add to cart</button>}
                     {item && item.count > 0 && <div className="count-options">
                         <div className="added">Added to cart &nbsp;<FaCheck /></div>

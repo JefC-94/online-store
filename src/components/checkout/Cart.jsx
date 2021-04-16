@@ -3,12 +3,12 @@ import { CartContext } from '../../contexts/CartContext';
 
 function Cart() {
 
-    const {cartItems, minusCartItem, plusCartItem} = useContext(CartContext);
+    const {cart, minusCartItem, plusCartItem} = useContext(CartContext);
 
     return (
         <div className="cart-container">
             
-            {cartItems.map(item => {
+            {cart.map(item => {
                 return (
                 <div className="cart-item" key={item.id}>
                     <p>{item.product_id.name}</p>
@@ -28,7 +28,7 @@ function Cart() {
             }
 
             <div className="total-price">
-                {cartItems.reduce((acc, val) => acc + val.product_id.price * val.count, 0)}
+                {cart.reduce((acc, val) => acc + val.product_id.price * val.count, 0)}
             </div>
         </div>
     )
