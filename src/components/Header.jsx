@@ -3,6 +3,9 @@ import {UserContext} from '../contexts/UserContext';
 
 import {Link} from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
+import {ReactComponent as StoreLogo} from '../images/store-logo.svg';
+
+import {FaShoppingCart, FaUser} from 'react-icons/fa';
 
 function Header() {
 
@@ -14,18 +17,27 @@ function Header() {
     return (
         <header>
             <div className="container">
-            <Link to="/store">Online Store</Link>
-
-            <div className="navbar">
-                <p>{cart && cart.reduce((acc, val) => acc + val.count, 0)}</p>
-                <Link to="/checkout">Checkout</Link>
+            <div className="header-left">
+                <Link className="white" to="/store">
+                    <StoreLogo />
+                </Link>
             </div>
-            {isAuth && <div>
-                {theUser.username}
-                <button className="button primary" id="logoutBtn" onClick={logoutUser}>Logout</button>
-            </div>}
-            {!isAuth && <Link className="button" to="/lobby">Login</Link>}
-            </div>            
+
+            <div className="header-right">
+                <div className="cart">
+                    <p className="count">{cart && cart.reduce((acc, val) => acc + val.count, 0)}</p>
+                    <Link className="white center" to="/cart"><FaShoppingCart size="20" /></Link>
+                </div>
+                {isAuth && <div className="user-info">
+                    <div className="username">
+                        <p className="username">{theUser.username}</p>
+                        <FaUser size="18" />
+                    </div>
+                    <button className="white" id="logoutBtn" onClick={logoutUser}>Logout</button>
+                </div>}
+                {!isAuth && <Link className="white" to="/lobby">Login</Link>}
+                </div>   
+            </div>    
         </header>
     )
 }

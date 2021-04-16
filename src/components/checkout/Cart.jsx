@@ -6,7 +6,7 @@ function Cart() {
     const {cart, minusCartItem, plusCartItem} = useContext(CartContext);
 
     return (
-        <div className="cart-container">
+        <main className="container inner">
             
             {cart.map(item => {
                 return (
@@ -30,7 +30,7 @@ function Cart() {
             <div className="total-price">
                 {cart.reduce((acc, val) => acc + val.product_id.price * val.count, 0)}
             </div>
-        </div>
+        </main>
     )
 }
 

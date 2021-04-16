@@ -19,16 +19,65 @@ html, body{
     padding:0 2em;
 }
 
+.inner{
+    padding-top:2em;
+    padding-bottom:2em;
+}
+
 header{
     width:100%;
-    height:80px;
-    background:var(--accentColor);
-    color:white;
+    height:70px;
+    background:var(--otherColor);
+    color:var(--primaryBgColor);
     font-weight:bold;
+
+    p, a, div{
+        color:var(--primaryBgColor);
+    }
     
     .container{
         height:inherit;
         @include flex(row, space-between, center);
+
+        .header-left{
+            @include flex(row, flex-start, center);
+
+            svg{
+                height:40px;
+            }
+        }
+
+        .header-right{
+            @include flex(row, flex-end, center);
+            
+            .cart{
+                margin:0 2em;
+
+                @include flex(row, center, center);
+    
+                p.count{
+                    margin-right:.5rem;
+                }
+            }
+
+            .user-info{
+                @include flex(row, flex-start, center);
+
+                div.username{
+                    @include flex(row, flex-start, center);
+                    color:var(--accentColor);
+                    padding-right:1em;
+                    margin-right:1em;
+                    border-right:2px solid var(--primaryBgColor);
+
+                    p.username{
+                        color:var(--accentColor);
+                        margin-right:.5rem;margin-right:.5rem;
+                    }
+                }
+            }
+        }
+        
     }
 }
 

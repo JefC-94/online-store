@@ -42,7 +42,7 @@ p.success{
 a, button{
     font-family: $hoofdfont, sans-serif;
     font: var(--hoofdfont);
-    color:var(--primaryBgColor);
+    color:var(--primaryTextColor);
 }
 
 a.button, button.button{
@@ -76,7 +76,7 @@ a.circle, button.circle{
 
 a.primary, button.primary{
     background-color:var(--accentColor);
-    color:white;
+    color:var(--primaryBgColor);
     transition:background-color .2s ease;
 
     &:hover{
@@ -85,8 +85,8 @@ a.primary, button.primary{
 }
 
 a.secondary, button.secondary{
-    background-color:rgb(228, 228, 228);
-    color:var(--primaryTextColor);
+    background:none;
+    color:var(--accentColor);
 
     &:hover{
         background:rgb(211, 211, 211);
@@ -94,11 +94,12 @@ a.secondary, button.secondary{
 }
 
 a.white, button.white{
-    background-color:var(--primaryBgColor);
-    color:var(--accentColor);
+    background:none;
+    font-size:14px;
+    color:var(--primaryBgColor);
 
     &:hover{
-        background-color:rgb(241, 241, 241);
+        color:rgb(219, 219, 219);
     }
 }
 
@@ -115,4 +116,12 @@ a.arrow, button.arrow{
     background:none;
     font-size:1.4em;
     line-height:1;
+
+    &:hover{
+        color:var(--secondaryTextColor);
+    }
+}
+
+a.center, button.center{
+    @include flex(row, center, center);
 }

@@ -6,7 +6,7 @@ import About from './About';
 import Footer from './Footer';
 import Header from './Header';
 import ProductDetail from './store/ProductDetail';
-import Checkout from './checkout/Checkout';
+import Cart from './checkout/Cart';
 import {BrowserRouter} from 'react-router-dom';
 
 //Protected directory, cart/checkout is not accessible unless authenticated user
@@ -42,7 +42,7 @@ function Home(){
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/about' component={About} />
                 <Route path='/store' component={Store} />
-                <Route path='/checkout' component={Checkout} />
+                <Route path='/cart' component={Cart} />
                 <Route path='/product/:id' component={ProductDetail} />
             </Switch>
             <Footer></Footer>

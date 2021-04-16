@@ -6,7 +6,7 @@ function Store() {
 
     return (
         <>
-            <main className="container store-main"> 
+            <main className="container inner store-main"> 
                 <ProductFilter />
                 <ProductList />
             </main>

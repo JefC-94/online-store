@@ -1,5 +1,4 @@
 .store-main{
-    padding:2em 2em;
     @include flex(row, flex-start, flex-start);
 }
 
@@ -35,12 +34,6 @@
             input[type=checkbox]{
                 margin-right:.4em;
             }
-
-            /* &:hover{
-                label{
-                    color:var(--accentColor);
-                }
-            } */
         }
 
     }
@@ -85,18 +78,18 @@
             flex:1;
             margin-right:2em;
 
-            a{
+            a.name, p.name{
                 font-weight:600;
             }
 
-            p{
+            p.description{
                 margin-top:1em;
                 font-size:14px;
             }
         }
 
         .list-item-extra{
-            width:200px;
+            width:150px;
 
             .price-wrap{
                 margin-bottom:1rem;
@@ -107,21 +100,25 @@
                 }
             }
 
+            .addtocart{
+                height:50px;
+            }
+
             .count-options{
-                @include flex(row, flex-start, center);
+                height:50px;
+                @include flex(row, space-around, center);
+                padding:0 .5em;
+                width: 105px;
+                color: var(--successColor);
+                border: 1px solid var(--successColor);
 
                 div.added{
-                    padding:0 .5em;
-                    height:40px;
-                    line-height:35px;
-                    font-weight:700;
-                    font-size:14px;
-                    border: 2px solid forestgreen;
-                    margin-right:.5rem;
+                    @include flex(row, center, center);
+                    margin-right:1.5em;
                 }
 
                 p.count{
-                    font-size:28px;
+                    font-size:20px;
                 }
 
                 div.count-buttons{
@@ -129,6 +126,15 @@
 
                     button{
                         font-size:18px;
+                        font-weight:400;
+
+                        &.arrow-down{
+                            margin-top:-2px;
+                        }
+
+                        &.arrow-up{
+                            margin-bottom:-2px;
+                        }
                     }
                 }
             }

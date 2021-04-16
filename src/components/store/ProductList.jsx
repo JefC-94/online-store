@@ -10,7 +10,7 @@ function ProductList() {
         <div className="products-container">
         <div className="above-list">
             
-            {showedProducts.length > 0 && showedProducts.length + (showedProducts.length === 1 ? " result found." : " results found.")} 
+            {showedProducts.length > 0 && showedProducts.length + (showedProducts.length === 1 ? " result found" : " results found")} 
         </div>
         <div className="product-list">
             {showedProducts && showedProducts.map(product => {

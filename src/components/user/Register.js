@@ -119,7 +119,7 @@ function Register({setShowLogin}){
             </div>
         );
     } else {
-        return <Redirect to='/dashboard' />
+        return <Redirect to='/store' />
     }
 }
 

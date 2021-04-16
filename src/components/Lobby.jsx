@@ -24,7 +24,7 @@ function Lobby() {
 
 
     return (
-        <main className="container main-lobby">
+        <main className="container inner main-lobby">
         <div className='lobby-container'>
             <div className='lobby-panel'>
                     {showLogin && <Login setShowLogin={setShowLogin} />}
