@@ -28,22 +28,23 @@ function CartContextProvider(props) {
         if(orderId){
             getCart();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderId]);
 
     async function getCart(){
-        const request = await axiosObject.get(`/del_order/${orderId}?join=del_order_item,product`);
-        setCart(request.data.del_order_item);
+        const request = await axiosObject.get(`/cart/${orderId}?join=cart_item,product`);
+        setCart(request.data.cart_item);
     }
 
     async function getCartFromUser(){
-        const request = await axiosObject.get(`/del_order?join=del_order_item,product&filter=user_id,eq,${theUser.id}`);
+        const request = await axiosObject.get(`/cart?join=cart_item,product&filter=user_id,eq,${theUser.id}`);
         setOrderId(request.data.records[0].id);
     }
 
     async function getCartFromLS(){
         if(localStorage.getItem('cart_id')){
             const cartId = localStorage.getItem('cart_id');
-            const request = await axiosObject.get(`/del_order/${cartId}?join=del_order_item,product`);
+            const request = await axiosObject.get(`/cart/${cartId}?join=cart_item,product`);
             setOrderId(request.data.id);
         } else {
             setOrderId();
@@ -52,7 +53,7 @@ function CartContextProvider(props) {
     }
 
     async function addCartItem(product_id){
-        const request = await axiosObject.post(`/del_order_item`, {
+        const request = await axiosObject.post(`/cart_item`, {
             order_id: orderId,
             product_id: product_id,
             count: 1
@@ -62,18 +63,18 @@ function CartContextProvider(props) {
     }
 
     async function plusCartItem(item){
-        const request = await axiosObject.put(`/del_order_item/${item.id}`, {count : item.count+1});
+        const request = await axiosObject.put(`/cart_item/${item.id}`, {count : item.count+1});
         console.log(request.data);
         getCart();
     }
 
     async function minusCartItem(item){
         if(item.count === 1){
-            const request = await axiosObject.delete(`/del_order_item/${item.id}`);
+            const request = await axiosObject.delete(`/cart_item/${item.id}`);
             console.log(request.data);
         }
         if(item.count > 1){
-            const request = await axiosObject.put(`/del_order_item/${item.id}`, {count : item.count-1});
+            const request = await axiosObject.put(`/cart_item/${item.id}`, {count : item.count-1});
             console.log(request.data);
         }
         getCart();
@@ -81,20 +82,21 @@ function CartContextProvider(props) {
 
   
     async function createCart(product_id){
-        console.log("create cart!");
         const timestamp = Math.floor(new Date().getTime() / 1000 );
-        const request1 = await axiosObject.post(`/del_order`, {
+        const request1 = await axiosObject.post(`/cart`, {
             user_id: null,
             created_at: timestamp
         });
         const orderId = request1.data;
-        const request = await axiosObject.post(`/del_order_item`, {
+        const request = await axiosObject.post(`/cart_item`, {
             order_id: orderId,
             product_id: product_id,
             count: 1
         });
-        setOrderId(orderId);
-        localStorage.setItem('cart_id', orderId);
+        if(request.status === 200 && request1.status === 200){
+            setOrderId(orderId);
+            localStorage.setItem('cart_id', orderId);
+        }
     }
 
     async function deleteCart(){

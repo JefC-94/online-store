@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import {UserContext} from '../contexts/UserContext';
 import Store from './Store';
 import Lobby from './Lobby';
 import About from './About';
