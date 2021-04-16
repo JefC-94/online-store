@@ -4,7 +4,7 @@ import {CartContext} from '../../contexts/CartContext';
 import {UserContext} from '../../contexts/UserContext';
 import {axiosObject} from '../../Constants';
 import {imgPath} from '../../Constants';
-import {FaChevronUp, FaChevronDown, FaCheck} from 'react-icons/fa';
+import {FaTrash, FaCheck, FaShoppingCart} from 'react-icons/fa';
 
 function ProductDetail() {
 
@@ -15,7 +15,7 @@ function ProductDetail() {
 
     const [product, setProduct] = useState({});
     const [item, setItem] = useState();
-    const {cart, addCartItem, minusCartItem, plusCartItem, createCart} = useContext(CartContext);
+    const {cart, addCartItem, updateCartItem, createCart, deleteCartItem} = useContext(CartContext);
 
     useEffect(() => {
         getProduct();
@@ -75,12 +75,26 @@ function ProductDetail() {
                 <div className="list-item-extra">
                     {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Add to cart</button>}
                     {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Add to cart</button>}
-                    {item && item.count > 0 && <div className="count-options">
-                        <div className="added"><FaCheck size="16" /></div>
-                        <p className="count">{item.count}</p>
-                        <div className="count-buttons">
-                            <button className="arrow arrow-up" onClick={() => plusCartItem(item)}><FaChevronUp /></button>
-                            <button className="arrow arrow-down" onClick={() => minusCartItem(item)}><FaChevronDown /></button>
+                    {item && item.count > 0 && <div className="count-wrap">
+                        <div className="added">
+                            <span className="circular-icon"><FaCheck size="16" /></span> 
+                            <p>Toegevoegd</p>
+                            {/* <FaShoppingCart size="20" /> */}
+                        </div>
+                        <div className="options">
+                            <select value={item.count} onChange={(e) => {updateCartItem(item, e.target.value)}}>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                                <option value={6}>6</option>
+                                <option value={7}>7</option>
+                                <option value={8}>8</option>
+                                <option value={9}>9</option>
+                                <option value={10}>10</option>
+                            </select>
+                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash size="18" /></button>
                         </div>
                     </div>}
                 </div>

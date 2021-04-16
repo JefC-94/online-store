@@ -89,7 +89,7 @@ a.secondary, button.secondary{
     color:var(--accentColor);
 
     &:hover{
-        background:rgb(211, 211, 211);
+        color:var(--accentDarkColor);
     }
 }
 

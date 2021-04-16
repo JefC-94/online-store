@@ -1,0 +1,117 @@
+.cart-main{
+    @include flex(column, flex-start, flex-start);
+}
+
+.cart-nav{
+    width:100%;
+    @include flex(row, space-between, center);
+    margin-bottom:1rem;
+
+    h1{
+        font-size:20px;
+    }
+}
+
+.cart-wrap{
+    width:100%;
+
+    .cart-list{
+        border:1px solid var(--secondaryBgColor);
+
+        .cart-item{
+            @include flex(row, space-between, center);
+            padding:1em 2em;
+
+            .cart-item-info{
+                @include flex(row, flex-start, flex-start);
+
+                .cart-item-image{
+                    width:100px;
+                    
+                    img{
+                        max-width:100%;
+                        object-fit:contain;
+                    }
+                }
+                
+                .cart-item-content{
+                    margin-left:1rem;
+
+                    a.name{
+                        font-weight:600;
+                        margin-bottom:.5em;
+                    }
+                }
+            }
+
+            .cart-item-extra{
+                @include flex(row, flex-end, center);
+
+                .count-options{
+                    @include flex(row, flex-start, center);
+                    margin-right:1em;
+
+                    label{
+                        margin-right:1em;
+                    }
+
+                    select{
+                        height:40px;
+                        padding:.5em;
+                    }
+
+                }
+
+                p.items-price{
+                    width:70px;
+                    font-weight:600;
+                    margin:1em;
+                }
+            }
+
+            &:not(:last-of-type){
+                border-bottom:1px solid var(--secondaryBgColor);
+            }
+        }
+    }
+}
+
+.checkout-wrap{
+    margin-top:2em;
+    width:100%;
+    border:1px solid var(--secondaryBgColor);
+    @include flex(row, space-between, center);
+    padding:2em;
+
+    .checkout-right{
+
+        table{
+            width:300px;
+
+            tr{
+
+                td{
+                    padding:.25em;
+                }
+
+                td:last-of-type{
+                    text-align:right;
+                }
+
+                &.finalTotal{
+                    border-top:2px solid var(--primaryTextColor);
+                    font-weight:600;
+
+                    td{
+                        padding:.5em .25em;
+                    }
+                }
+            }
+        }
+
+        .confirm-order{
+            margin-top:1em;
+            @include flex(row, center, center);
+        }
+    }
+}

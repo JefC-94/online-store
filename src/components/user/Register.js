@@ -75,29 +75,29 @@ function Register({setShowLogin}){
     if(!isAuth){
         return(
             <div className="panel-register">
-                <h1 className="lobby">Sign Up</h1>
+                <h1 className="lobby">Registreer</h1>
                 
                 <form id="register-form" onSubmit={submitForm} noValidate>
                     
                     <div className="form-control">
-                        <label htmlFor="username">Name</label>
-                        <input className="form-input" name="username" required type="text" value={userInfo.username} onChange={onChangeValue} placeholder="Username"/>
+                        <label htmlFor="username">Gebruikersnaam</label>
+                        <input className="form-input" name="username" required type="text" value={userInfo.username} onChange={onChangeValue} placeholder="Gebruikersnaam"/>
                         {error.type === "username" && 
                             <p className="error">{error.message}</p>
                         }
                     </div>
                     
                     <div className="form-control">
-                        <label htmlFor="email">Email</label>
-                        <input className="form-input" name="email" required type="email" value={userInfo.email} onChange={onChangeValue} placeholder="Email"/>
+                        <label htmlFor="email">E-mail</label>
+                        <input className="form-input" name="email" required type="email" value={userInfo.email} onChange={onChangeValue} placeholder="E-mail"/>
                         {error.type === "email" && 
                             <p className="error">{error.message}</p>
                         }
                     </div>
 
                     <div className="form-control">
-                        <label htmlFor="password">Password</label>
-                        <input className="form-input" name="password" required type="password" value={userInfo.password} onChange={onChangeValue} placeholder="Password" />
+                        <label htmlFor="password">Wachtwoord</label>
+                        <input className="form-input" name="password" required type="password" value={userInfo.password} onChange={onChangeValue} placeholder="Wachtwoord" />
                         {error.type === "password" && 
                             <p className="error">{error.message}</p>
                         }
@@ -109,7 +109,7 @@ function Register({setShowLogin}){
                 </form>
 
                 <div className="below-form">
-                    <span>Already an account?</span>
+                    <span>Niet jouw eerste bezoek?</span>
                     <button 
                         className='lobbySwitchBtn link' 
                         onClick={() => setShowLogin(prevVal => !prevVal)}

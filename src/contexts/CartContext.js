@@ -80,7 +80,18 @@ function CartContextProvider(props) {
         getCart();
     }
 
-  
+    async function deleteCartItem(item){
+        const request = await axiosObject.delete(`/cart_item/${item.id}`);
+        console.log(request.data);
+        getCart();
+    }
+
+    async function updateCartItem(item, newCount){
+        const request = await axiosObject.put(`/cart_item/${item.id}`, {count: newCount});
+        console.log(request.data);
+        getCart();
+    }
+
     async function createCart(product_id){
         const timestamp = Math.floor(new Date().getTime() / 1000 );
         const request1 = await axiosObject.post(`/cart`, {
@@ -110,6 +121,8 @@ function CartContextProvider(props) {
             addCartItem,
             plusCartItem,
             minusCartItem,
+            updateCartItem,
+            deleteCartItem,
             createCart,
             deleteCart,
         }}>

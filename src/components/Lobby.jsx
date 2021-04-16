@@ -31,9 +31,9 @@ function Lobby() {
                     {!showLogin && <Register setShowLogin={setShowLogin} />}
             </div>
             <div className="demo-wrap">
-                <p>It's also possible to login with one of the demo accounts</p>
+                <p>Log in met een van de demo accounts</p>
                 <button className="button primary fullwidth" onClick={() => demoLogin()}>
-                    View demo
+                    Demo
                 </button>
             </div>
         </div>

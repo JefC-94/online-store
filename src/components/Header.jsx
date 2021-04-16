@@ -25,7 +25,7 @@ function Header() {
 
             <div className="header-right">
                 <div className="cart">
-                    <p className="count">{cart && cart.reduce((acc, val) => acc + val.count, 0)}</p>
+                    <p className="count">{cart && cart.length}</p>
                     <Link className="white center" to="/cart"><FaShoppingCart size="20" /></Link>
                 </div>
                 {isAuth && <div className="user-info">
@@ -33,7 +33,7 @@ function Header() {
                         <p className="username">{theUser.username}</p>
                         <FaUser size="18" />
                     </div>
-                    <button className="white" id="logoutBtn" onClick={logoutUser}>Logout</button>
+                    <button className="white" id="logoutBtn" onClick={logoutUser}>Log uit</button>
                 </div>}
                 {!isAuth && <Link className="white" to="/lobby">Login</Link>}
                 </div>   

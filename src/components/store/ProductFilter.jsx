@@ -66,11 +66,11 @@ function ProductFilter() {
                 <h3>Sortering</h3>
                 <div className="filter-control">
                     <select value={filters.sorting} onChange={(e) => setFilters(prevVal => ({...prevVal, sorting: e.target.value}))}>
-                        <option value="">Sort by</option>
-                        <option value="PRICE_ASC">Price - Lowest to Highest</option>
-                        <option value="PRICE_DESC">Price - Highest to Lowest</option>
-                        <option value="ALPHA_ASC">Alphabet - A-Z</option>
-                        <option value="ALPHA_DESC">Alphabet - Z-A</option>
+                        <option value="">Sorteer op</option>
+                        <option value="PRICE_ASC">Prijs - laag naar hoog</option>
+                        <option value="PRICE_DESC">Prijs - hoog naar laag</option>
+                        <option value="ALPHA_ASC">Alfabetisch - A-Z</option>
+                        <option value="ALPHA_DESC">Alfabetisch - Z-A</option>
                     </select>
                 </div>
             </div>

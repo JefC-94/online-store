@@ -66,16 +66,16 @@ function Login({setShowLogin}){
                 <h1 className="lobby">Login</h1>
                 <form  id="login-form" onSubmit={submitForm} noValidate>
                     <div className="form-control">
-                        <label htmlFor="email" >Email</label>
-                        <input className="form-input" name="email" type="email" required placeholder="Email" value={userInfo.email} onChange={onChangeValue} />
+                        <label htmlFor="email" >E-mail</label>
+                        <input className="form-input" name="email" type="email" required placeholder="E-mail" value={userInfo.email} onChange={onChangeValue} />
                         {error.type === "email" && 
                             <p className="error">{error.message}</p>
                         }
                     </div>
                 
                     <div className="form-control">
-                        <label htmlFor="password" >Password</label>
-                        <input className="form-input" name="password" type="password" required placeholder="Password" value={userInfo.password} onChange={onChangeValue} autoComplete="on" />
+                        <label htmlFor="password" >Wachtwoord</label>
+                        <input className="form-input" name="password" type="password" required placeholder="Wachtwoord" value={userInfo.password} onChange={onChangeValue} autoComplete="on" />
                         {error.type === "password" && 
                             <p className="error">{error.message}</p>
                         }
@@ -86,11 +86,11 @@ function Login({setShowLogin}){
                     </div>
                 </form>
                 <div className="below-form">
-                    <span>Not registered yet?</span>
+                    <span>Nog geen account?</span>
                     <button
                         className='lobbySwitchBtn link' 
                         onClick={() => setShowLogin(prevVal => !prevVal)}
-                    >Signup</button> 
+                    >Registreer</button> 
                 </div>
             </div>
         );
