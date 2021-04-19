@@ -104,7 +104,7 @@ function Cart() {
                     </tbody>
                 </table>
                 <div className="confirm-order">
-                    <button className="button primary center" onClick={() => confirmOrder()}>Bevestig bestelling</button>
+                    <button className="button primary center" onClick={() => confirmOrder()}>Bevestig mijn bestelling</button>
                 </div>
                 </div>
             </div>}

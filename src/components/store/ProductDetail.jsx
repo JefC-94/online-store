@@ -4,7 +4,7 @@ import {CartContext} from '../../contexts/CartContext';
 import {UserContext} from '../../contexts/UserContext';
 import {axiosObject} from '../../Constants';
 import {imgPath} from '../../Constants';
-import {FaTrash, FaCheck, FaShoppingCart} from 'react-icons/fa';
+import {FaTrash, FaCheck} from 'react-icons/fa';
 
 function ProductDetail() {
 

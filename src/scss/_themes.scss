@@ -125,3 +125,15 @@ a.arrow, button.arrow{
 a.center, button.center{
     @include flex(row, center, center);
 }
+
+
+// FORM ELEMENTS STYLING
+
+select{
+    height:30px;
+    border:1px solid var(--secondaryTextColor);
+    outline:none;
+    border-radius:2px;
+    padding-left:10px;
+    font-size:15px;
+}

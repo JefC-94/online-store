@@ -7,7 +7,7 @@ function ProductContextProvider(props) {
 
     const [products, setProducts] = useState([]);
 
-    const [showedProducts, setShowedProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         getProducts();
@@ -18,11 +18,11 @@ function ProductContextProvider(props) {
 
     useEffect(() => {
         if(products){
-            setShowedProducts(products);
+            setFilteredProducts(products);
             //console.log(products);
         }
         return () => {
-            setShowedProducts([]);
+            setFilteredProducts([]);
         }
     }, [products]);
 
@@ -32,7 +32,7 @@ function ProductContextProvider(props) {
     }
 
     function sortAndFilter({sorting, brands, categories, name}){
-        setShowedProducts([...products
+        setFilteredProducts([...products
             .filter(product => {
                 if(name){
                     return product.name.toLowerCase().includes(name.toLowerCase());
@@ -78,7 +78,7 @@ function ProductContextProvider(props) {
     return (
         <ProductContext.Provider value={{
             products,
-            showedProducts,
+            filteredProducts,
             sortAndFilter,
         }}>
             {props.children}
