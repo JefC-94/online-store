@@ -70,9 +70,24 @@ function ProductDetail() {
             <div className="list-item-info">
                 <div className="list-item-content">
                     <p className="name" >{product.name}</p>
-                    <p className="description">{product.description}</p>
+                    <p className="specs">
+                        {product.specs}
+                    </p>
+                    <p className="description">
+                        {product.description}
+                    </p>
+                    <p className={product.in_stock ? "stock in-stock" : "stock not-in-stock"}>
+                        {product.in_stock ? "op voorraad" : "tijdelijk niet leverbaar"}
+                    </p>
                 </div>
                 <div className="list-item-extra">
+                    <div className="price-wrap">
+                        {product.price && <p className="price">
+                            <span className="eurosign">€</span>
+                            <span>{product.price.slice(0,-3)}</span>
+                            <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
+                        </p>}
+                    </div>  
                     {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Add to cart</button>}
                     {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Add to cart</button>}
                     {item && item.count > 0 && <div className="count-wrap">

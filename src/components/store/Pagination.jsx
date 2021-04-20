@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import {BiChevronLeft, BiChevronRight} from 'react-icons/bi';
 
-function Pagination({pageData, pageLimit, setPageLimit, filteredProducts, goToPage}) {
+function Pagination({filters, setFilters, pageData, pageLimit, setPageLimit, goToPage}) {
     
     function onPrevClick(){
         const prevPage = pageData.currentPage - 1;
@@ -17,7 +17,15 @@ function Pagination({pageData, pageLimit, setPageLimit, filteredProducts, goToPa
     return (
         <>
         <div className="results">
-            <p>{filteredProducts.length > 0 && filteredProducts.length + (filteredProducts.length === 1 ? " resultaat gevonden" : " resultaten gevonden")}</p>
+            <div className="filter-control">
+                <select value={filters.sorting} onChange={(e) => setFilters(prevVal => ({...prevVal, sorting: e.target.value}))}>
+                    <option value="">Sorteer op</option>
+                    <option value="PRICE_ASC">Prijs - laag naar hoog</option>
+                    <option value="PRICE_DESC">Prijs - hoog naar laag</option>
+                    <option value="ALPHA_ASC">Alfabetisch - A-Z</option>
+                    <option value="ALPHA_DESC">Alfabetisch - Z-A</option>
+                </select>
+            </div>
         </div>
         <div className="pagination-info">
             <p>Pagina</p>

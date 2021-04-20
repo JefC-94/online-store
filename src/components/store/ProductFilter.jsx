@@ -2,16 +2,11 @@ import React, {useContext, useState, useEffect} from 'react'
 import {ProductContext} from '../../contexts/ProductContext';
 import {axiosObject} from '../../Constants';
 
-function ProductFilter() {
+import {FaTimes} from 'react-icons/fa';
 
-    const {sortAndFilter} = useContext(ProductContext);
+function ProductFilter({filters, setFilters}) {
 
-    const [filters, setFilters] = useState({
-        sorting: "", 
-        brands: [], 
-        categories: [], 
-        name: null
-    });
+    const {filteredProducts} = useContext(ProductContext);
 
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
@@ -30,11 +25,6 @@ function ProductFilter() {
     }
 
     useEffect(() => {
-        sortAndFilter(filters);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters]);
-
-    useEffect(() => {
         if(inputField){
             setTimeout(() => {
                 setFilters(prevVal => ({...prevVal, name: inputField}));
@@ -42,6 +32,7 @@ function ProductFilter() {
         } else {
             setFilters(prevVal => ({...prevVal, name: null}));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputField]);
 
     function onBrandCheck(target){
@@ -60,19 +51,31 @@ function ProductFilter() {
         }
     }
 
+    function onStockCheck(target){
+        if(target.checked){
+            setFilters(prevVal => ({...prevVal, in_stock: true}));
+        } else {
+            setFilters(prevVal => ({...prevVal, in_stock: null}));
+        }
+    }
+
+    function resetAllButSorting(){
+        setFilters(prevVal => ({...prevVal,
+            brands: [], 
+            categories: [], 
+            name: null,
+            in_stock: null
+        })
+        );
+        setInputField('');
+    }
+
     return (
         <div className="product-filter">
-            <div className="filter-wrap">
-                <h3>Sortering</h3>
-                <div className="filter-control">
-                    <select value={filters.sorting} onChange={(e) => setFilters(prevVal => ({...prevVal, sorting: e.target.value}))}>
-                        <option value="">Sorteer op</option>
-                        <option value="PRICE_ASC">Prijs - laag naar hoog</option>
-                        <option value="PRICE_DESC">Prijs - hoog naar laag</option>
-                        <option value="ALPHA_ASC">Alfabetisch - A-Z</option>
-                        <option value="ALPHA_DESC">Alfabetisch - Z-A</option>
-                    </select>
-                </div>
+            <div className="results-wrap">
+                <p>{filteredProducts.length + (filteredProducts.length === 1 ? " resultaat" : " resultaten")}</p>
+                {(filters.brands.length > 0 || filters.categories.length > 0 || filters.name || filters.in_stock) && 
+                <button className="link" onClick={() => resetAllButSorting()}><FaTimes size="14" /> Wis filters</button>}
             </div>
             <div className="filter-wrap">
                 <h3>Zoek op naam</h3>
@@ -85,8 +88,8 @@ function ProductFilter() {
                 {brands && brands.map(brand => {
                     return (
                         <div key={brand.id} className="filter-control">
-                            <input type="checkbox" value={brand.id} onChange={(e) => onBrandCheck(e.target)} />
-                            <label>{brand.name}</label>
+                            <input type="checkbox" id={`brand${brand.id}`} value={brand.id} checked={filters.brands.filter(item => +item === brand.id).length > 0 ? true : false} onChange={(e) => onBrandCheck(e.target)} />
+                            <label htmlFor={`brand${brand.id}`} >{brand.name}</label>
                         </div>
                     )
                 })}                
@@ -96,13 +99,19 @@ function ProductFilter() {
                 {categories && categories.map(category => {
                     return (
                         <div key={category.id} className="filter-control">
-                            <input type="checkbox" value={category.id} onChange={(e) => onCategoryCheck(e.target)} />
-                            <label>{category.name}</label>
+                            <input type="checkbox" id={`cat${category.id}`} value={category.id} checked={filters.categories.filter(item => +item === category.id).length > 0 ? true : false} onChange={(e) => onCategoryCheck(e.target)} />
+                            <label htmlFor={`cat${category.id}`} >{category.name}</label>
                         </div>
                     )
                 })}
             </div>
-            {/* {JSON.stringify(filters)} */}
+            <div className="filter-wrap">
+                <h3>Beschikbaarheid</h3>
+                <div className="filter-control">
+                    <input type="checkbox" id="in_stock" value="in_stock" checked={filters.in_stock} onChange={(e) => onStockCheck(e.target)} />
+                    <label htmlFor="in_stock" >Op voorraad</label>
+                </div>
+            </div>
         </div>
     )
 }

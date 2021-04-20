@@ -3,13 +3,13 @@ import { ProductContext } from '../../contexts/ProductContext';
 import ProductItem from './ProductItem';
 import Pagination from './Pagination';
 
-function ProductList() {
+function ProductList({filters, setFilters}) {
 
     const [pageLimit, setPageLimit] = useState(() => {
         if(sessionStorage.getItem('pageLimit')){
             return sessionStorage.getItem('pageLimit');
         }
-        return 2;
+        return 5;
     });
 
     //Keep the pageData here to sync both paginations together
@@ -41,13 +41,13 @@ function ProductList() {
         });
         //Slice out the right set of products for this page
         const offset = (currentPage - 1) * pageLimit;
-        setCurrentProducts(filteredProducts.slice(offset, offset + pageLimit));
+        setCurrentProducts(filteredProducts.slice(offset, (+offset) + (+pageLimit)));
     }
 
     return (
         <div className="products-container">
             <div className="above-list">
-                <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} filteredProducts={filteredProducts} goToPage={goToPage} />
+                <Pagination filters={filters} setFilters={setFilters} pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>
             <div className="product-list">
                 {currentProducts.length > 0 && currentProducts.map(product => {
@@ -58,7 +58,7 @@ function ProductList() {
                 </div>}
             </div>
             {pageLimit > 2 && <div className="below-list">
-                <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} filteredProducts={filteredProducts} goToPage={goToPage} />
+                <Pagination filters={filters} setFilters={setFilters} pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>}
         </div>
     )

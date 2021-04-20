@@ -31,7 +31,7 @@ function ProductContextProvider(props) {
         setProducts(request.data.records);
     }
 
-    function sortAndFilter({sorting, brands, categories, name}){
+    function sortAndFilter({sorting, brands, categories, name, in_stock}){
         setFilteredProducts([...products
             .filter(product => {
                 if(name){
@@ -53,6 +53,13 @@ function ProductContextProvider(props) {
                     //compare two arrays: the categories on which we want to filter and the product categories (array from prod_cat property)
                     const match = categories.filter(category => product.prod_cat.filter(prod_cat => prod_cat.cat_id === +category).length > 0 ? +category : null);
                     return match.length > 0 ? product : null;
+                } else {
+                    return product;
+                }
+            })
+            .filter(product => {
+                if(in_stock){
+                    return product.in_stock ? product : null;
                 } else {
                     return product;
                 }

@@ -54,12 +54,24 @@ function ProductItem({product}) {
             <div className="list-item-info">
                 <div className="list-item-content">
                     <Link className="name" to={`/product/${product.id}`}>{product.name}</Link>
-                    <p className="description">{product.description.substring(0,100)}...</p>
+                    <p className="specs">
+                        {product.specs}
+                    </p>
+                    <p className="description">
+                        {product.description.split(' ').slice(0,15).join(' ')}...
+                    </p>
+                    <p className={product.in_stock ? "stock in-stock" : "stock not-in-stock"}>
+                        {product.in_stock ? "op voorraad" : "tijdelijk niet leverbaar"}
+                    </p>
                 </div>
                 <div className="list-item-extra">
                     <div className="price-wrap">
-                        <p className="price">{product.price}</p>
-                    </div>                    
+                        <p className="price">
+                            <span className="eurosign">€</span>
+                            <span>{product.price.slice(0,-3)}</span>
+                            <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
+                        </p>
+                    </div>                 
                     {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
                     {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
                     {item && item.count > 0 && <div className="count-wrap">
