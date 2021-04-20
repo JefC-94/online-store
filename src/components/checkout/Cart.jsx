@@ -36,7 +36,12 @@ function Cart() {
                 <Link className="button secondary center" to="/store"><BiChevronLeft size="22" /> Winkel verder</Link>
                 <h1>Winkelwagentje</h1>
             </div>
-            {(!cart || cart.length === 0 ) && <div className="center-message"><p style={{marginBottom:'1em'}}>Je hebt nog niets aan je winkelkarretje toegevoegd.</p><Link className="button primary center" to="/store">Start met winkelen!</Link></div>}
+            {(!cart || cart.length === 0 ) && 
+                <div className="center-message">
+                    <p style={{marginBottom:'1em'}}>Je hebt nog niets aan je winkelkarretje toegevoegd.</p>
+                    <Link className="button primary center padded" to="/store">Start met winkelen!</Link>
+                </div>
+            }
             {(cart && cart.length > 0 ) && <div className="cart-wrap">
                 <div className="cart-list">
                     {cart.length > 0 && cart.map(item => {
@@ -67,7 +72,7 @@ function Cart() {
                                         <option value={10}>10</option>
                                     </select>
                                 </div>
-                                <p className="items-price" >€ {item.product_id.price * item.count}</p>
+                                <p className="items-price" >€{item.product_id.price * item.count}</p>
                                 <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash /></button>
                             </div>
                         </div>
@@ -86,25 +91,25 @@ function Cart() {
                     <tr>
                         <td>Totaal artikelen</td>
                         <td>
-                            {amounts.cartTotal}
+                            €{amounts.cartTotal}
                         </td>
                     </tr>
                     <tr>
                         <td>BTW</td>
                         <td>
-                            {amounts.btw}
+                            €{amounts.btw}
                         </td>
                     </tr>
                     <tr className="finalTotal">
                         <td>Totaal</td>
                         <td>
-                            {finalTotal}
+                            €{finalTotal}
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <div className="confirm-order">
-                    <button className="button primary center" onClick={() => confirmOrder()}>Bevestig mijn bestelling</button>
+                    <button className="button primary center padded" onClick={() => confirmOrder()}>Bevestig mijn bestelling</button>
                 </div>
                 </div>
             </div>}

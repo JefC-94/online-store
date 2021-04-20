@@ -53,7 +53,7 @@ function ProductList({filters, setFilters}) {
                 {currentProducts.length > 0 && currentProducts.map(product => {
                     return <ProductItem key={product.id} product={product} />
                 })}
-                {currentProducts.length === 0 && <div className="no-results">
+                {currentProducts.length === 0 && <div className="center-message">
                 We hebben geen producten gevonden voor deze filters.
                 </div>}
             </div>

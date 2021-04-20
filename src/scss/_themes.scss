@@ -9,6 +9,12 @@ h2{
     font-size:20px;
 }
 
+h3{
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:0.2em;
+}
+
 @media screen and (max-width:$smallscreen){
 
     h1{
@@ -50,7 +56,6 @@ a.button, button.button{
     height:40px;
     border-radius:0px;
     font-weight:700;
-    padding:0 1em;
     text-align:center;
     font-size:14px;
     line-height:40px;
@@ -126,6 +131,9 @@ a.center, button.center{
     @include flex(row, center, center);
 }
 
+a.padded, button.padded{
+    padding:0 1em;
+}
 
 // FORM ELEMENTS STYLING
 

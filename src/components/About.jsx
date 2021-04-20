@@ -10,6 +10,9 @@ function About() {
                     <p>
                         Deze e-commerce website werd gebouwd en gestijld door Jef Ceuppens, als onderdeel van de opleiding Front-end Developer bij Syntra AB.
                     </p>
+                    <p>
+                        Alle producten en merken zijn fictief en dienen louter als voorbeeld.
+                    </p>
                 </div>
                 
                 <div className="about-block">

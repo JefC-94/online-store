@@ -1,21 +1,31 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {ProductContext} from '../../contexts/ProductContext';
 import {axiosObject} from '../../Constants';
+import {WindowContext} from '../../contexts/WindowContext';
 
 import {FaTimes} from 'react-icons/fa';
 
 function ProductFilter({filters, setFilters}) {
 
     const {filteredProducts} = useContext(ProductContext);
+    const {windowWidth} = useContext(WindowContext);
 
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
 
     const [inputField, setInputField] = useState('');
 
+    const [showFilters, setShowFilters] = useState(true);
+
     useEffect(() => {
         getBrandsAndCats();
     }, []);
+
+    useEffect(() => {
+        if(windowWidth > 1000){
+            setShowFilters(true);
+        }
+    }, [windowWidth]);
 
     async function getBrandsAndCats(){
         const request1 = await axiosObject.get('/category');
@@ -77,6 +87,8 @@ function ProductFilter({filters, setFilters}) {
                 {(filters.brands.length > 0 || filters.categories.length > 0 || filters.name || filters.in_stock) && 
                 <button className="link" onClick={() => resetAllButSorting()}><FaTimes size="14" /> Wis filters</button>}
             </div>
+            {showFilters &&
+            <>
             <div className="filter-wrap">
                 <h3>Zoek op naam</h3>
                 <div className="filter-control">
@@ -112,6 +124,11 @@ function ProductFilter({filters, setFilters}) {
                     <label htmlFor="in_stock" >Op voorraad</label>
                 </div>
             </div>
+            </>
+            }
+            {windowWidth < 1000 &&
+            <button className="button primary center toggle-filters" onClick={() => setShowFilters(prevVal => !prevVal)}>{showFilters ? "Verberg" : "Toon"} filters</button>
+            }
         </div>
     )
 }

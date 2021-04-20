@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import {CartContext} from '../../contexts/CartContext';
 import {Link} from 'react-router-dom';
 import {UserContext} from '../../contexts/UserContext';
+import {WindowContext} from '../../contexts/WindowContext';
 import {imgPath} from '../../Constants';
 import {FaTrash, FaCheck, FaShoppingCart} from 'react-icons/fa';
 
@@ -12,7 +13,9 @@ function ProductItem({product}) {
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
 
-    const {cart, addCartItem, updateCartItem, createCart, deleteCartItem} = useContext(CartContext);
+    const {windowWidth} = useContext(WindowContext);
+
+    const {cart, addCartItem, createCart, deleteCartItem} = useContext(CartContext);
 
     useEffect(() => {
         //Three options:
@@ -50,52 +53,41 @@ function ProductItem({product}) {
 
     return (
         <div className="product-list-item" key={product.id} >
-            <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
+            {windowWidth < 520 && <Link className="product-name" to={`/product/${product.id}`}>{product.name}</Link>}
+            <div className="list-item-img">
+                <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
+            </div>
             <div className="list-item-info">
                 <div className="list-item-content">
-                    <Link className="name" to={`/product/${product.id}`}>{product.name}</Link>
-                    <p className="specs">
+                    {windowWidth > 520 && <Link className="product-name" to={`/product/${product.id}`}>{product.name}</Link>}
+                    <p className="product-specs">
                         {product.specs}
                     </p>
-                    <p className="description">
+                    <p className="product-description">
                         {product.description.split(' ').slice(0,15).join(' ')}...
                     </p>
-                    <p className={product.in_stock ? "stock in-stock" : "stock not-in-stock"}>
+                    <p className={product.in_stock ? "product-stock in-stock" : "product-stock not-in-stock"}>
                         {product.in_stock ? "op voorraad" : "tijdelijk niet leverbaar"}
                     </p>
                 </div>
                 <div className="list-item-extra">
-                    <div className="price-wrap">
-                        <p className="price">
-                            <span className="eurosign">€</span>
-                            <span>{product.price.slice(0,-3)}</span>
-                            <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
-                        </p>
-                    </div>                 
-                    {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
-                    {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
-                    {item && item.count > 0 && <div className="count-wrap">
-                        <div className="added">
+                    <div className="product-price">
+                        <span className="eurosign">€</span>
+                        <span>{product.price.slice(0,-3)}</span>
+                        <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
+                    </div>
+                    <div className="cart-wrap">
+                        {!item && <button className="button primary center padded" onClick={() => createCart(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
+                        {item && item.count === 0 && <button className="button primary center padded" onClick={() => addCartItem(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
+                        {item && item.count > 0 && 
+                        <div className="item-added">
+                            <div className="cart-check">
                             <span className="circular-icon"><FaCheck size="16" /></span> 
-                            <p>Toegevoegd</p>
-                            {/* <FaShoppingCart size="20" /> */}
-                        </div>
-                        <div className="options">
-                            <select value={item.count} onChange={(e) => {updateCartItem(item, e.target.value)}}>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                                <option value={6}>6</option>
-                                <option value={7}>7</option>
-                                <option value={8}>8</option>
-                                <option value={9}>9</option>
-                                <option value={10}>10</option>
-                            </select>
+                            <p>In winkelwagen</p>
+                            </div>
                             <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash size="18" /></button>
-                        </div>
-                    </div>}
+                        </div>}
+                    </div>
                 </div>
             </div>
         </div>
