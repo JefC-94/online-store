@@ -4,11 +4,11 @@ import axios from 'axios';
 
 // DON'T FORGET TO CHANGE PRODUCTION DETAILS!!
 
-const usernamePasswordBuffer = Buffer.from('chatsterapi:babblewasbeter');
+const usernamePasswordBuffer = Buffer.from('fantasticstoreapi:fantasticfour');
 const base64data = usernamePasswordBuffer.toString('base64');
 
 const axiosProd = axios.create({
-    baseURL: 'https://chatster.be/server/api/api.php/records',
+    baseURL: 'https://fantastic-store.be/server/api/api.php/records',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Basic ${base64data}`,
@@ -23,6 +23,6 @@ export const axiosObject = process.env.NODE_ENV === 'development' ? axiosDev : a
 
 //IMG PATH ON LOCALHOST AND PRODUCTION ENV
 
-export const imgPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'https://chatster.be/server';
+export const imgPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'https://fantastic-store.be/server';
 
 //https://github.com/Flynsarmy/PHPWebSocket-Chat
