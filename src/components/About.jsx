@@ -8,10 +8,10 @@ function About() {
                 <h1>Over dit project</h1>
                 <div className="about-block">
                     <p>
-                        Deze e-commerce website werd gebouwd en gestijld door Jef Ceuppens, als onderdeel van de opleiding Front-end Developer bij Syntra AB.
+                        Deze e-commerce website werd gebouwd in React door Jef Ceuppens, als onderdeel van de opleiding Front-end Developer bij Syntra AB. De layout werd gemaakt in SCSS.
                     </p>
                     <p>
-                        Alle producten en merken zijn fictief en dienen louter als voorbeeld.
+                        Alle producten en merken zijn fictief en dienen enkel als voorbeeld.
                     </p>
                 </div>
                 

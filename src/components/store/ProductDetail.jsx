@@ -48,7 +48,7 @@ function ProductDetail() {
     }, [product, cart]);
 
     async function getProduct(){
-        const request = await axiosObject(`/product/${id}`);
+        const request = await axiosObject(`/product/${id}?join=prod_spec,spec`);
         setProduct(request.data);
     }
 
@@ -102,8 +102,8 @@ function ProductDetail() {
                 </div>
                 </div> 
                 <div className="cart-wrap">
-                    {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
-                    {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe &nbsp;<FaShoppingCart size="20" /></button>}
+                    {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
+                    {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
                     {item && item.count > 0 && 
                     <>
                     <div className="item-added">
@@ -111,7 +111,7 @@ function ProductDetail() {
                             <span className="circular-icon"><FaCheck size="16" /></span> 
                             <p>In winkelwagen</p>
                             </div>
-                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash size="18" /></button>
+                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash className="mg-r" size="18" />Verwijder</button>
                     </div>
                     <div className="item-count">
                         <span>Aantal</span>
@@ -136,6 +136,20 @@ function ProductDetail() {
             <p className="description">
                 {product.description}
             </p>
+            <div className="specs">
+                <h2>Technische specificaties</h2>
+                <table>
+                {product.prod_spec && product.prod_spec.map(spec => {
+                    return (
+                    <>
+                    <tr>
+                    <td>{spec.type_id.type}</td><td>{spec.value}</td>
+                    </tr>
+                    </>
+                    )
+                })}
+                </table>
+            </div>
         </div>
         </>
         }

@@ -18,15 +18,15 @@ function Header() {
         <header>
             <div className="container">
             <div className="header-left">
-                <Link className="white" to="/store">
+                <Link to="/store">
                     <StoreLogo />
                 </Link>
             </div>
 
             <div className="header-right">
                 <div className="cart">
-                    <p className="count">{cart && cart.length}</p>
-                    <Link className="white center" to="/cart"><FaShoppingCart size="20" /></Link>
+                    
+                    <Link className="white center" to="/cart"><span>{cart && cart.length}</span><FaShoppingCart className="mg-l" size="20" /></Link>
                 </div>
                 {isAuth && <div className="user-info">
                     <div className="username">

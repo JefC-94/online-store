@@ -100,7 +100,6 @@ a.secondary, button.secondary{
 
 a.white, button.white{
     background:none;
-    font-size:14px;
     color:var(--primaryBgColor);
 
     &:hover{
@@ -144,4 +143,92 @@ select{
     //border-radius:2px;
     padding-left:5px;
     font-size:15px;
+}
+
+
+// ********* PRODUCT THEMES: APPLIED TO PRODUCT ITEM & PRODUCT DETAIL PAGE ******** //
+
+a.product-name, p.product-name{
+    font-weight:600;
+    font-size:1.2em;
+}
+
+p.product-specs{
+    font-size:13px;
+    color:var(--secondaryTextColor);
+}
+
+p.product-description{
+    font-size:14px;
+}
+
+p.product-rating{
+    font-weight:600;
+    font-size:18px;
+}
+
+p.product-stock{
+    display:inline-block;
+    padding:0.2em 0.5em;
+
+    &.not-in-stock{
+        border:1px solid var(--secondaryTextColor);
+        color:var(--secondaryTextColor);
+    }
+
+    &.in-stock{
+        border:1px solid var(--successColor);
+        color:var(--successColor);
+    }
+}
+
+div.product-price{
+    font-size:26px;
+    font-weight:700;
+    color:var(--otherColor);
+
+    span.eurosign{
+        font-size:22px;
+        font-weight:600;
+        margin-right:5px;
+    }
+}
+
+.cart-wrap{
+
+    button.addtocart{
+        padding:1.5em 2.5em;
+    }
+
+    div.item-added{
+        @include flex(column, space-between, flex-start);
+        font-size:14px;   
+        font-weight:600;
+
+        .cart-check{
+            @include flex(row, flex-start, center);
+            margin-bottom:.5em;
+
+            p{color:var(--successColor)};
+
+            span.circular-icon{
+                background:var(--successColor);
+                color:white;
+                width:35px;
+                height:35px;
+                @include flex(row, center, center);
+                border-radius:50%;
+                margin-right:.5em;
+            }
+        }
+    }
+
+    div.item-count{
+        @include flex(row, flex-start, center);
+        margin-top:.5em;
+
+        select{
+            margin-left:1em;
+        }
+    }
 }

@@ -2,13 +2,11 @@ html, body{
     font: normal 100%/1.4 $hoofdfont;
     color:var(--primaryTextColor);
     max-height:100vh;
-    width:100vw;
     overflow-x:hidden;
 }
 
 #root{
     height:100vh;
-    width:100vw;
     @include flex(column, flex-start, flex-start);
 }
 
@@ -53,8 +51,12 @@ header{
         .header-left{
             padding-top:10px;
 
-            svg{
-                height:45px;
+            a{
+                display:block;
+
+                svg{
+                    height:45px;
+                }
             }
         }
 
@@ -65,8 +67,11 @@ header{
                 @include flex(row, center, center);
                 margin:0 2em;
                 
-                p.count{
-                    margin-right:.5rem;
+                a{
+                    span{
+                        font-size:18px;
+                        margin-right:5px;
+                    }
                 }
             }
 
@@ -88,6 +93,29 @@ header{
     }
 }
 
+@media screen and (max-width: $smallscreen){
+
+    header{
+
+        .container{
+
+            .header-left{
+                
+                svg{
+                    height:35px;
+                }
+            }
+
+            .header-right{
+                
+                .cart{
+                    margin-right:1em;
+                }
+            }
+        }
+    }
+}
+
 main{
     width:100%;
     flex:1;
@@ -97,6 +125,7 @@ footer{
     width:100%;
     min-height:50px;
     @include flex(row, center, center);
+    border-top:1px solid var(--secondaryBgColor);
 
     p, a, span{
         font-size:14px;

@@ -16,6 +16,8 @@ function Cart() {
 
     const [finalTotal, setFinalTotal] = useState(0);
 
+    const [showAlert, setShowAlert] = useState(false);
+
     useEffect(() => {
         setFinalTotal((+amounts.cartTotal + +amounts.btw).toFixed(2));
     }, [amounts]);
@@ -73,7 +75,7 @@ function Cart() {
                                     </select>
                                 </div>
                                 <p className="items-price" >€{item.product_id.price * item.count}</p>
-                                <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash /></button>
+                                <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash className="mg-r" />Verwijder</button>
                             </div>
                         </div>
                         )
@@ -109,7 +111,8 @@ function Cart() {
                     </tbody>
                 </table>
                 <div className="confirm-order">
-                    <button className="button primary center padded" onClick={() => confirmOrder()}>Bevestig mijn bestelling</button>
+                    <button className="button primary center padded" onClick={() => setShowAlert(true)}>Bevestig mijn bestelling</button>
+                    {showAlert && <p className="alert-end">Bij bevestiging zou de bezoeker omgeleid worden naar een betalingssysteem.</p>}
                 </div>
                 </div>
             </div>}

@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect, useRef, useLayoutEffect} from 'r
 import {ProductContext} from '../../contexts/ProductContext';
 import {axiosObject} from '../../Constants';
 import {WindowContext} from '../../contexts/WindowContext';
-
 import {FaTimes} from 'react-icons/fa';
 
 function ProductFilter() {
@@ -15,7 +14,16 @@ function ProductFilter() {
 
     const [inputField, setInputField] = useState('');
 
-    const [showFilters, setShowFilters] = useState(false);
+    //set showfilters on true for large screen
+    const [showFilters, setShowFilters] = useState(() => {
+        if(windowWidth < 900){
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    const [showAlert, setShowAlert] = useState(false);
 
     const productFilters = useRef();
     const overlay = useRef();
@@ -37,15 +45,24 @@ function ProductFilter() {
             setTimeout(() => {
                 setFilters(prevVal => ({...prevVal, name: inputField}));
             }, 400);
+            setShowAlert(true);
         } else {
             setFilters(prevVal => ({...prevVal, name: null}));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputField]);
 
+    useEffect(() => {
+        if(showAlert){
+            setTimeout(() => {setShowAlert(false)}, 1400);
+        }
+    }, [showAlert]);
+
     //User clicks on overlay (out of filters-panel) -> hide filters
     useLayoutEffect(() => {
         const handleWindowClick = (e) => {
+            /* console.log(overlay.current);
+            console.log(e.target); */
             if(windowWidth < 900){
                 if(e.target === overlay.current){
                     setShowFilters(false);
@@ -73,6 +90,7 @@ function ProductFilter() {
         } else {
             setFilters(prevVal => ({...prevVal, brands: [...prevVal.brands.filter(brand => brand !== target.value)]}));
         }
+        setShowAlert(true);
     }
 
     function onCategoryCheck(target){
@@ -81,6 +99,7 @@ function ProductFilter() {
         } else {
             setFilters(prevVal => ({...prevVal, categories: [...prevVal.categories.filter(category => category !== target.value)]}));
         }
+        setShowAlert(true);
     }
 
     function onStockCheck(target){
@@ -89,6 +108,7 @@ function ProductFilter() {
         } else {
             setFilters(prevVal => ({...prevVal, in_stock: null}));
         }
+        setShowAlert(true);
     }
 
     function resetAllButSorting(){
@@ -109,7 +129,7 @@ function ProductFilter() {
                 {(filters.brands.length > 0 || filters.categories.length > 0 || filters.name || filters.in_stock) && 
                 <button className="link" onClick={() => resetAllButSorting()}><FaTimes size="14" /> Wis filters</button>}
             </div>
-            {showFilters && windowWidth < 900 &&
+            {showFilters &&
             <div ref={overlay} className="overlay"></div>
             }
             {showFilters &&
@@ -150,6 +170,7 @@ function ProductFilter() {
                         <label htmlFor="in_stock" >Op voorraad</label>
                     </div>
                 </div>
+                {(windowWidth < 900 && showAlert) && <p className="filter-change-alert">Filters geüpdated!</p>}
             </div>
             }
             {windowWidth < 900 &&

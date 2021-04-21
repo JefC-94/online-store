@@ -61,7 +61,11 @@ function ProductItem({product}) {
                 <div className="list-item-content">
                     {windowWidth > 520 && <Link className="product-name" to={`/product/${product.id}`}>{product.name}</Link>}
                     <p className="product-specs">
-                        {product.specs}
+                        {product.prod_spec.map((spec, index, array) => {
+                            return (
+                                <span>{spec.value} {index < array.length-1 && <span> | </span>}</span>
+                            )
+                        })}
                     </p>
                     <p className="product-description">
                         {product.description.split(' ').slice(0,15).join(' ')}...
@@ -85,7 +89,7 @@ function ProductItem({product}) {
                             <span className="circular-icon"><FaCheck size="16" /></span> 
                             <p>In winkelwagen</p>
                             </div>
-                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash size="18" /></button>
+                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash className="mg-r" size="18" />Verwijder</button>
                         </div>}
                     </div>
                 </div>

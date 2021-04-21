@@ -94,21 +94,25 @@
 
             .cart-item{
                 padding:1.5em 1em;
+                align-items:flex-start;
 
                 .cart-item-info{
                     @include flex(column-reverse, space-between, flex-start);
-                    width:50%;
+                    width:60%;
 
                     .cart-item-content{
                         margin-left:0;
                         margin-bottom:1em;
+
+                        a.name{
+                            font-size:15px;
+                        }
                     }
                 }
 
                 .cart-item-extra{
                     @include flex(column, space-between, flex-start);
                     
-
                     .count-options{
                         margin-right:0;
 
@@ -124,11 +128,6 @@
 
                     button{
                         padding:0;
-                        svg{margin-left:5px;}
-                    }
-
-                    button::before{
-                        content: "Verwijder";
                     }
                 }
             }
@@ -142,16 +141,18 @@
     border:1px solid var(--secondaryBgColor);
     @include flex(row, space-between, center);
     padding:2em;
+    width:500px;
 
     .checkout-right{
+        width:100%;
 
         table{
-            width:300px;
+            width:100%;
 
             tr{
 
                 td{
-                    padding:.25em;
+                    padding:.4em 0;
                 }
 
                 td:last-of-type{
@@ -163,7 +164,7 @@
                     font-weight:600;
 
                     td{
-                        padding:.5em .25em;
+                        padding:.5em 0em;
                     }
                 }
             }
@@ -171,7 +172,11 @@
 
         .confirm-order{
             margin-top:1em;
-            @include flex(row, center, center);
+            @include flex(column, center, center);
+
+            .alert-end{
+                margin-top:1em;
+            }
         }
     }
 }
