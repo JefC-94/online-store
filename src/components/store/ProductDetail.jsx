@@ -65,7 +65,7 @@ function ProductDetail() {
     return (
         <main className="container inner">
         <div className="back-to-store">
-            <Link className="button secondary center" to="/store"><BiChevronLeft size="22" /> Back to all products</Link>
+            <Link className="button secondary center" to="/"><BiChevronLeft size="22" /> Back to all products</Link>
         </div>
         <div className="product-detail-wrap">
         <div className="product-heading">

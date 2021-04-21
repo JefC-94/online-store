@@ -96,7 +96,7 @@ function Login({setShowLogin}){
         );
     
     } else {
-        return <Redirect to={'/store'} />
+        return <Redirect to={'/'} />
     }
 }
 

@@ -35,13 +35,13 @@ function Cart() {
     return (
         <main className="container inner cart-main">
             <div className="cart-nav">
-                <Link className="button secondary center" to="/store"><BiChevronLeft size="22" /> Winkel verder</Link>
+                <Link className="button secondary center" to="/"><BiChevronLeft size="22" /> Winkel verder</Link>
                 <h1>Winkelwagentje</h1>
             </div>
             {(!cart || cart.length === 0 ) && 
                 <div className="center-message">
                     <p style={{marginBottom:'1em'}}>Je hebt nog niets aan je winkelkarretje toegevoegd.</p>
-                    <Link className="button primary center padded" to="/store">Start met winkelen!</Link>
+                    <Link className="button primary center padded" to="/">Start met winkelen!</Link>
                 </div>
             }
             {(cart && cart.length > 0 ) && <div className="cart-wrap">

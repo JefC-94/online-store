@@ -30,7 +30,7 @@ function Home(){
         <BrowserRouter>
             <Header></Header>
             <Switch>
-                <Route
+                {/* <Route
                     exact
                     path="/"
                     render={() => {
@@ -38,10 +38,10 @@ function Home(){
                             <Redirect to="/store" />
                         )
                     }}
-                />
+                /> */}
+                <Route exact path='/' component={Store} />
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/about' component={About} />
-                <Route path='/store' component={Store} />
                 <Route path='/cart' component={Cart} />
                 <Route path='/product/:id' component={ProductDetail} />
             </Switch>
