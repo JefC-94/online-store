@@ -32,7 +32,7 @@ function Lobby() {
             </div>
             <div className="demo-wrap">
                 <p>Log in met een van de demo accounts</p>
-                <button className="button primary fullwidth" onClick={() => demoLogin()}>
+                <button className="button primary padded" onClick={() => demoLogin()}>
                     Demo
                 </button>
             </div>

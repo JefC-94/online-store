@@ -53,7 +53,7 @@ function Cart() {
                                 </div>
                                 <div className="cart-item-content">
                                     <Link className="name" to={`/product/${item.product_id.id}`}>{item.product_id.name}</Link>
-                                    <p>{item.product_id.price}</p>
+                                    <p>€{item.product_id.price}</p>
                                 </div>
                             </div>
                             <div className="cart-item-extra">
@@ -82,9 +82,9 @@ function Cart() {
                     </div>
             </div>}
             {(cart && cart.length > 0) && <div className="checkout-wrap">
-                <div className="checkout-left">
+                {/* <div className="checkout-left">
                     Promo's enzo
-                </div>
+                </div> */}
                 <div className="checkout-right">
                 <table>
                     <tbody>
