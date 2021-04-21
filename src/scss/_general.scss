@@ -19,6 +19,13 @@ html, body{
     padding:0 2em;
 }
 
+@media screen and (max-width:$smallscreen){
+
+    .container{
+        padding:0 1em;
+    }
+}
+
 .inner{
     padding-top:2em;
     padding-bottom:2em;

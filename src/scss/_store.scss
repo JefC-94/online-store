@@ -69,11 +69,11 @@
         border-top:1px solid var(--secondaryBgColor);
         border-bottom:1px solid var(--secondaryBgColor);
 
-        .results, .pagination-info, .pagination-perpage{
+        .items-sorting, .pagination-nav, .pagination-perpage{
             width:33.3%;
         }
 
-        .pagination-info{
+        .pagination-nav{
             @include flex(row, center, center);
             
             p.current-page{
@@ -127,36 +127,34 @@
     
         .above-list, .below-list{
             width:100%;
-            @include flex(column, space-around, center);
-            height:120px;
-            border-top:1px solid var(--secondaryBgColor);
-            border-bottom:1px solid var(--secondaryBgColor);
+            @include flex(column, space-around, space-between);
+            height:80px;
     
-            .results, .pagination-info, .pagination-perpage{
+            .row-top{
                 width:100%;
+                @include flex(row, space-between, flex-start);
+            
+                .items-sorting{
+                    width:40%;
+                } 
+                
+                .pagination-perpage{
+                    width:50%;
+                }
             }
 
-            .results{
-                select{
+            .row-bottom{
+
+                .pagination-nav{
                     width:100%;
+                    @include flex(row, center, center);
+                    
+                    p.current-page{
+                        font-weight:600;
+                    }
                 }
-            }
-    
-            .pagination-info{
-                @include flex(row, center, center);
-                
-                p.current-page{
-                    font-weight:600;
-                }
-            }
-    
-            .pagination-perpage{
-                text-align:center;
-    
-                label{margin-right:.5em;}
             }
         }
-
     }
 }
 
