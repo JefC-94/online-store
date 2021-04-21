@@ -1,13 +1,13 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef, useLayoutEffect} from 'react'
 import {ProductContext} from '../../contexts/ProductContext';
 import {axiosObject} from '../../Constants';
 import {WindowContext} from '../../contexts/WindowContext';
 
 import {FaTimes} from 'react-icons/fa';
 
-function ProductFilter({filters, setFilters}) {
+function ProductFilter() {
 
-    const {filteredProducts} = useContext(ProductContext);
+    const {filteredProducts, filters, setFilters} = useContext(ProductContext);
     const {windowWidth} = useContext(WindowContext);
 
     const [categories, setCategories] = useState([]);
@@ -15,25 +15,23 @@ function ProductFilter({filters, setFilters}) {
 
     const [inputField, setInputField] = useState('');
 
-    const [showFilters, setShowFilters] = useState(true);
+    const [showFilters, setShowFilters] = useState(false);
+
+    const productFilters = useRef();
+    const overlay = useRef();
 
     useEffect(() => {
         getBrandsAndCats();
     }, []);
 
+    //when window width goes above 900, make sure to show filters by default
     useEffect(() => {
-        if(windowWidth > 1000){
+        if(windowWidth > 900){
             setShowFilters(true);
         }
     }, [windowWidth]);
 
-    async function getBrandsAndCats(){
-        const request1 = await axiosObject.get('/category');
-        setCategories(request1.data.records);
-        const request2 = await axiosObject.get('/brand');
-        setBrands(request2.data.records);
-    }
-
+    //When user types in inputfield, we need to filter on name (but wait 400ms)
     useEffect(() => {
         if(inputField){
             setTimeout(() => {
@@ -44,6 +42,30 @@ function ProductFilter({filters, setFilters}) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputField]);
+
+    //User clicks on overlay (out of filters-panel) -> hide filters
+    useLayoutEffect(() => {
+        const handleWindowClick = (e) => {
+            if(windowWidth < 900){
+                if(e.target === overlay.current){
+                    setShowFilters(false);
+                }
+            }
+        }
+        window.addEventListener('click', handleWindowClick);
+        return () => {
+            window.removeEventListener('click', handleWindowClick);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    //Fetch the brands and categories for in filters
+    async function getBrandsAndCats(){
+        const request1 = await axiosObject.get('/category');
+        setCategories(request1.data.records);
+        const request2 = await axiosObject.get('/brand');
+        setBrands(request2.data.records);
+    }
 
     function onBrandCheck(target){
         if(target.checked){
@@ -81,53 +103,57 @@ function ProductFilter({filters, setFilters}) {
     }
 
     return (
-        <div className="product-filter">
+        <div className="filter-container">
             <div className="results-wrap">
                 <p>{filteredProducts.length + (filteredProducts.length === 1 ? " resultaat" : " resultaten")}</p>
                 {(filters.brands.length > 0 || filters.categories.length > 0 || filters.name || filters.in_stock) && 
                 <button className="link" onClick={() => resetAllButSorting()}><FaTimes size="14" /> Wis filters</button>}
             </div>
-            {showFilters &&
-            <>
-            <div className="filter-wrap">
-                <h3>Zoek op naam</h3>
-                <div className="filter-control">
-                    <input type="text" value={inputField} onChange={(e) => setInputField(e.target.value)} />
-                </div>
-            </div>
-            <div className="filter-wrap">
-                <h3>Merk</h3>
-                {brands && brands.map(brand => {
-                    return (
-                        <div key={brand.id} className="filter-control">
-                            <input type="checkbox" id={`brand${brand.id}`} value={brand.id} checked={filters.brands.filter(item => +item === brand.id).length > 0 ? true : false} onChange={(e) => onBrandCheck(e.target)} />
-                            <label htmlFor={`brand${brand.id}`} >{brand.name}</label>
-                        </div>
-                    )
-                })}                
-            </div>
-            <div className="filter-wrap">
-                <h3>Categorie</h3>
-                {categories && categories.map(category => {
-                    return (
-                        <div key={category.id} className="filter-control">
-                            <input type="checkbox" id={`cat${category.id}`} value={category.id} checked={filters.categories.filter(item => +item === category.id).length > 0 ? true : false} onChange={(e) => onCategoryCheck(e.target)} />
-                            <label htmlFor={`cat${category.id}`} >{category.name}</label>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="filter-wrap">
-                <h3>Beschikbaarheid</h3>
-                <div className="filter-control">
-                    <input type="checkbox" id="in_stock" value="in_stock" checked={filters.in_stock} onChange={(e) => onStockCheck(e.target)} />
-                    <label htmlFor="in_stock" >Op voorraad</label>
-                </div>
-            </div>
-            </>
+            {showFilters && windowWidth < 900 &&
+            <div ref={overlay} className="overlay"></div>
             }
-            {windowWidth < 1000 &&
-            <button className="button primary center toggle-filters" onClick={() => setShowFilters(prevVal => !prevVal)}>{showFilters ? "Verberg" : "Toon"} filters</button>
+            {showFilters &&
+            <div ref={productFilters} className="product-filters">
+                {windowWidth < 900 && <button className="button primary center toggle-filters" onClick={() => setShowFilters(prevVal => !prevVal)}>{showFilters ? "Verberg" : "Toon"} filters</button>}
+                <div className="filter-wrap">
+                    <h3>Zoek op naam</h3>
+                    <div className="filter-control">
+                        <input type="text" value={inputField} onChange={(e) => setInputField(e.target.value)} />
+                    </div>
+                </div>
+                <div className="filter-wrap">
+                    <h3>Merk</h3>
+                    {brands && brands.map(brand => {
+                        return (
+                            <div key={brand.id} className="filter-control">
+                                <input type="checkbox" id={`brand${brand.id}`} value={brand.id} checked={filters.brands.filter(item => +item === brand.id).length > 0 ? true : false} onChange={(e) => onBrandCheck(e.target)} />
+                                <label htmlFor={`brand${brand.id}`} >{brand.name}</label>
+                            </div>
+                        )
+                    })}                
+                </div>
+                <div className="filter-wrap">
+                    <h3>Categorie</h3>
+                    {categories && categories.map(category => {
+                        return (
+                            <div key={category.id} className="filter-control">
+                                <input type="checkbox" id={`cat${category.id}`} value={category.id} checked={filters.categories.filter(item => +item === category.id).length > 0 ? true : false} onChange={(e) => onCategoryCheck(e.target)} />
+                                <label htmlFor={`cat${category.id}`} >{category.name}</label>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="filter-wrap">
+                    <h3>Beschikbaarheid</h3>
+                    <div className="filter-control">
+                        <input type="checkbox" id="in_stock" value="in_stock" checked={filters.in_stock} onChange={(e) => onStockCheck(e.target)} />
+                        <label htmlFor="in_stock" >Op voorraad</label>
+                    </div>
+                </div>
+            </div>
+            }
+            {windowWidth < 900 &&
+            <button className="button primary center toggle-filters" onClick={() => setShowFilters(true)}>{showFilters ? "Verberg" : "Toon"} filters</button>
             }
         </div>
     )

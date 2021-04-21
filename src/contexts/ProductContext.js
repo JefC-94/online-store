@@ -8,7 +8,15 @@ function ProductContextProvider(props) {
     const [products, setProducts] = useState([]);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
-
+    
+    const [filters, setFilters] = useState({
+        sorting: "", 
+        brands: [], 
+        categories: [], 
+        name: null,
+        in_stock: null,
+    });
+    
     useEffect(() => {
         getProducts();
         return () => {
@@ -25,6 +33,11 @@ function ProductContextProvider(props) {
             setFilteredProducts([]);
         }
     }, [products]);
+
+    useEffect(() => {
+        sortAndFilter(filters);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [filters]);
 
     async function getProducts(){
         const request = await axiosObject('/product?join=del_order_item&join=prod_cat');        
@@ -86,7 +99,8 @@ function ProductContextProvider(props) {
         <ProductContext.Provider value={{
             products,
             filteredProducts,
-            sortAndFilter,
+            filters,
+            setFilters,
         }}>
             {props.children}
         </ProductContext.Provider>

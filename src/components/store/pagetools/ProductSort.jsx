@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {ProductContext} from '../../../contexts/ProductContext';
 
-function ProductSort({filters, setFilters}) {
+function ProductSort() {
+
+    const {filters, setFilters} = useContext(ProductContext);
+
     return (
         <div className="items-sorting">
             <div className="filter-control">

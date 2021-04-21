@@ -19,16 +19,21 @@ html, body{
     padding:0 2em;
 }
 
+.inner{
+    padding-top:2em;
+    padding-bottom:2em;
+}
+
 @media screen and (max-width:$smallscreen){
+
+    .inner{
+        padding-top:1em;
+        padding-bottom:1em;
+    }
 
     .container{
         padding:0 1em;
     }
-}
-
-.inner{
-    padding-top:2em;
-    padding-bottom:2em;
 }
 
 header{

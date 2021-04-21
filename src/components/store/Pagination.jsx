@@ -5,7 +5,7 @@ import ProductSort from './pagetools/ProductSort';
 import PageNav from './pagetools/PageNav';
 import PerPage from './pagetools/PerPage';
 
-function Pagination({filters, setFilters, pageData, pageLimit, setPageLimit, goToPage}) {
+function Pagination({pageData, pageLimit, setPageLimit, goToPage}) {
     
     const {windowWidth} = useContext(WindowContext);
 
@@ -13,7 +13,7 @@ function Pagination({filters, setFilters, pageData, pageLimit, setPageLimit, goT
         <>
         {windowWidth > 600 &&
         <>
-            <ProductSort filters={filters} setFilters={setFilters} />
+            <ProductSort />
             <PageNav pageData={pageData} goToPage={goToPage} />
             <PerPage pageLimit={pageLimit} setPageLimit={setPageLimit} />
         </>
@@ -21,7 +21,7 @@ function Pagination({filters, setFilters, pageData, pageLimit, setPageLimit, goT
         {windowWidth < 600 &&
             <>
             <div className="row-top">
-                <ProductSort filters={filters} setFilters={setFilters} />
+                <ProductSort />
                 <PerPage pageLimit={pageLimit} setPageLimit={setPageLimit} />
             </div>
             <div className="row-bottom">

@@ -3,7 +3,7 @@ import { ProductContext } from '../../contexts/ProductContext';
 import ProductItem from './ProductItem';
 import Pagination from './Pagination';
 
-function ProductList({filters, setFilters}) {
+function ProductList() {
 
     const [pageLimit, setPageLimit] = useState(() => {
         if(sessionStorage.getItem('pageLimit')){
@@ -47,18 +47,18 @@ function ProductList({filters, setFilters}) {
     return (
         <div className="products-container">
             <div className="above-list">
-                <Pagination filters={filters} setFilters={setFilters} pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
+                <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>
             <div className="product-list">
                 {currentProducts.length > 0 && currentProducts.map(product => {
                     return <ProductItem key={product.id} product={product} />
                 })}
                 {currentProducts.length === 0 && <div className="center-message">
-                We hebben geen producten gevonden voor deze filters.
+                <p>We hebben geen producten gevonden voor deze filters.</p>
                 </div>}
             </div>
             {pageLimit > 2 && <div className="below-list">
-                <Pagination filters={filters} setFilters={setFilters} pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
+                <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>}
         </div>
     )
