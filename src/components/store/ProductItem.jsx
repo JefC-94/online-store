@@ -63,7 +63,7 @@ function ProductItem({product}) {
                     <p className="product-specs">
                         {product.prod_spec.map((spec, index, array) => {
                             return (
-                                <span>{spec.value} {index < array.length-1 && <span> | </span>}</span>
+                                <span key={index}>{spec.value} {index < array.length-1 && <span> | </span>}</span>
                             )
                         })}
                     </p>

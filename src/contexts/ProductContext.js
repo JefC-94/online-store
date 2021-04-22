@@ -7,6 +7,7 @@ function ProductContextProvider(props) {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
     
@@ -43,11 +44,18 @@ function ProductContextProvider(props) {
     async function getProducts(){
         setLoading(true);
         //Join only with del_order_item and prod_cat -> we don't need names of brand/cat
-        const request = await axiosObject('/product?join=del_order_item&join=prod_cat&join=prod_spec,spec');        
-        if(request.status === 200){
+        setError(false);
+        //Join only with del_order_item and prod_cat -> we don't need names of brand/cat
+        try {
+            const request = await axiosObject('/product?join=del_order_item&join=prod_cat&join=prod_spec,spec');        
             setProducts(request.data.records);
             setLoading(false);
-        }
+            setError(false);
+        } catch(error){
+            console.log(error);
+            setError(true);
+            setLoading(false);
+        } 
     }
 
     function sortAndFilter({sorting, brands, categories, name, in_stock}){
@@ -105,6 +113,7 @@ function ProductContextProvider(props) {
         <ProductContext.Provider value={{
             products,
             loading,
+            error,
             filteredProducts,
             filters,
             setFilters,
