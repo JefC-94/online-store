@@ -8,7 +8,7 @@ const usernamePasswordBuffer = Buffer.from('fantasticstoreapi:fantasticfour');
 const base64data = usernamePasswordBuffer.toString('base64');
 
 const axiosProd = axios.create({
-    baseURL: 'http://fantastic-store.be/server/api/api.php/records',
+    baseURL: 'https://fantastic-store.be/server/api/api.php/records',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Basic ${base64data}`,
@@ -23,4 +23,4 @@ export const axiosObject = process.env.NODE_ENV === 'development' ? axiosDev : a
 
 //IMG PATH ON LOCALHOST AND PRODUCTION ENV
 
-export const imgPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'http://fantastic-store.be/server';
+export const imgPath = process.env.NODE_ENV === 'development' ? 'https://localhost:8080/online-store/server' : 'https://fantastic-store.be/server';

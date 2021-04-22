@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const UserContext = createContext();
 
-const url = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'http://www.fantastic-store.be/server';
+const url = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'https://fantastic-store.be/server';
 
 const Axios = axios.create({
     baseURL: url,

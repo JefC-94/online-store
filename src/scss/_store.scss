@@ -77,6 +77,7 @@
         width:100%;
         @include flex(row, space-between, center);
         height:60px;
+        min-height:60px;
 
         .items-sorting, .pagination-nav, .pagination-perpage{
             width:33.3%;
@@ -162,6 +163,7 @@
             width:100%;
             @include flex(column, space-around, space-between);
             height:100px;
+            min-height:100px;
     
             .row-top{
                 width:100%;

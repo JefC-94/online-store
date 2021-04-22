@@ -17,7 +17,7 @@ function About() {
                 
                 <div className="about-block">
                     <p>
-                        Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Om de bestelling te bevestigen moet de bezoeker een account aanmaken.
+                        Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Een ingelogde gebruiker heeft zijn persoonlijke shopping cart dat hij kan raadplegen met zijn account.
                     </p>
                 </div>
 
