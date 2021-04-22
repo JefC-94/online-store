@@ -18,7 +18,7 @@ function ProductList() {
         totalPages: null,
     });
 
-    const {filteredProducts, loading} = useContext(ProductContext);
+    const {filteredProducts, loading, error} = useContext(ProductContext);
     const [currentProducts, setCurrentProducts] = useState([]);
 
     useEffect(() => {
@@ -46,6 +46,12 @@ function ProductList() {
 
     return (
         <div className="products-container">
+            {error && 
+            <div className="center-message">
+                <p className="error">Something went wrong. Please try again later.</p>    
+            </div>}
+            {!error && 
+            <>
             <div className="above-list">
                 <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>
@@ -54,7 +60,7 @@ function ProductList() {
                 {currentProducts.length > 0 && currentProducts.map(product => {
                     return <ProductItem key={product.id} product={product} />
                 })}
-                {(!loading && currentProducts.length === 0) && <div className="center-message">
+                {(!error && !loading && currentProducts.length === 0) && <div className="center-message">
                 <p>We hebben geen producten gevonden voor deze filters.</p>
                 </div>}
             </div>
@@ -62,6 +68,8 @@ function ProductList() {
             {pageLimit > 2 && <div className="below-list">
                 <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>}
+            </>
+            }
         </div>
     )
 }
