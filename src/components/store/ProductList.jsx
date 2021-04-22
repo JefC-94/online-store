@@ -18,7 +18,7 @@ function ProductList() {
         totalPages: null,
     });
 
-    const {filteredProducts, loading} = useContext(ProductContext);
+    const {filteredProducts, loading, error} = useContext(ProductContext);
     const [currentProducts, setCurrentProducts] = useState([]);
 
     useEffect(() => {

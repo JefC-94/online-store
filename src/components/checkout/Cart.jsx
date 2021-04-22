@@ -7,7 +7,7 @@ import {FaTrash} from 'react-icons/fa';
 
 function Cart() {
 
-    const {cart, updateCartItem, deleteCartItem, confirmOrder} = useContext(CartContext);
+    const {cart, updateCartItem, deleteCartItem} = useContext(CartContext);
 
     const [amounts, setAmounts] = useState({
         cartTotal: 0,
