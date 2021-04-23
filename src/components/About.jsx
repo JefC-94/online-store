@@ -8,16 +8,19 @@ function About() {
                 <h1>Over dit project</h1>
                 <div className="about-block">
                     <p>
-                        Deze e-commerce website werd gebouwd in React door Jef Ceuppens, als onderdeel van de opleiding Front-end Developer bij Syntra AB. De layout werd gemaakt in SCSS.
+                        Deze e-commerce website werd ontwikkeld in React door Jef Ceuppens, als onderdeel van de opleiding Front-end Developer bij Syntra AB. De layout werd gemaakt in SCSS.
                     </p>
+                </div>
+
+                <div className="about-block">
                     <p>
-                        Alle producten en merken zijn fictief en dienen enkel als voorbeeld.
+                        Alle producten en merken zijn fictief en dienen enkel als voorbeeld. Omdat het om een fictieve winkel gaat, is er geen betalingssysteem of checkout geïmplementeerd.
                     </p>
                 </div>
                 
                 <div className="about-block">
                     <p>
-                        Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Een ingelogde gebruiker heeft zijn persoonlijke shopping cart dat hij kan raadplegen met zijn account.
+                        Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Een ingelogde gebruiker heeft zijn persoonlijke shopping cart dat hij kan raadplegen via zijn account.
                     </p>
                 </div>
 

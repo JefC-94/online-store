@@ -44,7 +44,7 @@ function Cart() {
                     <Link className="button primary center padded" to="/">Start met winkelen!</Link>
                 </div>
             }
-            {(cart && cart.length > 0 ) && <div className="cart-wrap">
+            {(cart && cart.length > 0 ) && 
                 <div className="cart-list">
                     {cart.length > 0 && cart.map(item => {
                         return (
@@ -54,12 +54,12 @@ function Cart() {
                                     <img src={`${imgPath}/${item.product_id.photo_url}`} alt={item.product_id.name} />
                                 </div>
                                 <div className="cart-item-content">
-                                    <Link className="name" to={`/product/${item.product_id.id}`}>{item.product_id.name}</Link>
-                                    <p>€{item.product_id.price}</p>
+                                    <Link className="product-name" to={`/product/${item.product_id.id}`}>{item.product_id.name}</Link>
+                                    <p className="cart-item-price">€{item.product_id.price}</p>
                                 </div>
                             </div>
                             <div className="cart-item-extra">
-                                <div className="count-options">
+                                <div className="item-count">
                                     <label>Aantal</label>
                                     <select value={item.count} onChange={(e) => {updateCartItem(item, e.target.value)}}>
                                         <option value={1}>1</option>
@@ -81,8 +81,8 @@ function Cart() {
                         )
                     })
                     }
-                    </div>
-            </div>}
+                </div>
+            }
             {(cart && cart.length > 0) && <div className="checkout-wrap">
                 {/* <div className="checkout-left">
                     Promo's enzo

@@ -23,4 +23,4 @@ export const axiosObject = process.env.NODE_ENV === 'development' ? axiosDev : a
 
 //IMG PATH ON LOCALHOST AND PRODUCTION ENV
 
-export const imgPath = process.env.NODE_ENV === 'development' ? 'https://localhost:8080/online-store/server' : 'https://fantastic-store.be/server';
+export const imgPath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/online-store/server' : 'https://fantastic-store.be/server';

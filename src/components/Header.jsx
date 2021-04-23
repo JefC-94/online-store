@@ -18,9 +18,9 @@ function Header() {
         <header>
             <div className="container">
             <div className="header-left">
-                <Link to="/">
-                    <StoreLogo />
-                </Link>
+                <h1><Link to="/" title="fantastic-store">
+                    <StoreLogo className="storelogo"/>
+                </Link></h1>
             </div>
 
             <div className="header-right">

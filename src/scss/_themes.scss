@@ -1,7 +1,7 @@
 // TITLE STYLING
 
 h1{
-    font-size:28px;
+    font-size:26px;
     font-weight:600;
 }
 
@@ -18,7 +18,7 @@ h3{
 @media screen and (max-width:$smallscreen){
 
     h1{
-        font-size:24px;
+        font-size:20px;
         line-height:1.1;
     }
 
@@ -54,6 +54,7 @@ a, button{
 a.button, button.button{
     display:inline-block;
     height:40px;
+    padding:0;
     border-radius:0px;
     font-weight:700;
     text-align:center;
@@ -101,6 +102,7 @@ a.secondary, button.secondary{
 a.white, button.white{
     background:none;
     color:var(--primaryBgColor);
+    padding:0;
 
     &:hover{
         color:rgb(219, 219, 219);
@@ -114,6 +116,10 @@ a.link, button.link{
     &:hover{
         color:var(--accentColor);
     }
+}
+
+a.active, button.active{
+    font-weight:600;
 }
 
 a.arrow, button.arrow{
@@ -134,23 +140,70 @@ a.padded, button.padded{
     padding:0 1em;
 }
 
+a.fullwidth, button.fullwidth{
+    width:100%;
+}
+
+a.mg-t, button.mg-t{
+    margin:1em 0;
+}
+
 // FORM ELEMENTS STYLING
+
+form{
+
+    .form-control{
+        margin:1.2em 0;
+        @include flex(column, flex-start, flex-start);
+
+        label{
+            font-size:15px;
+            display:none;
+        }
+
+        p.error{
+            margin-top:.3em;
+        }
+    }
+}
+
+input[type=text], input[type=email], input[type=password]{
+    height:40px;
+    width:100%;
+    border:none;
+    border-bottom:1px solid var(--secondaryTextColor);
+    font-size:16px;
+    padding-left:5px;
+    outline:none;
+
+    &:focus{
+        border-bottom:2px solid var(--primaryTextColor);
+    }
+}
+
+input[type=checkbox]{
+    margin-right:.4em;
+}
 
 select{
     height:30px;
     border:1px solid var(--secondaryTextColor);
     outline:none;
-    //border-radius:2px;
     padding-left:5px;
     font-size:15px;
 }
-
 
 // ********* PRODUCT THEMES: APPLIED TO PRODUCT ITEM & PRODUCT DETAIL PAGE ******** //
 
 a.product-name, p.product-name{
     font-weight:600;
     font-size:1.2em;
+}
+
+@media screen and (max-width:$smallscreen){
+    a.product-name, p.product-name{
+        font-size:1.1em;
+    }
 }
 
 p.product-specs{
@@ -222,13 +275,12 @@ div.product-price{
             }
         }
     }
+}
 
-    div.item-count{
-        @include flex(row, flex-start, center);
-        margin-top:.5em;
+div.item-count{
+    @include flex(row, flex-start, center);
 
-        select{
-            margin-left:1em;
-        }
+    select{
+        margin-left:1em;
     }
 }

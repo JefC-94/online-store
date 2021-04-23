@@ -62,12 +62,12 @@ function Login({setShowLogin}){
     if(!isAuth){
 
         return(
-            <div className="panel-login">
+            <div className="lobby-panel-left panel-login">
                 <h1 className="lobby">Login</h1>
                 <form  id="login-form" onSubmit={submitForm} noValidate>
                     <div className="form-control">
                         <label htmlFor="email" >E-mail</label>
-                        <input className="form-input" name="email" type="email" required placeholder="E-mail" value={userInfo.email} onChange={onChangeValue} />
+                        <input name="email" type="email" required placeholder="E-mail" value={userInfo.email} onChange={onChangeValue} />
                         {error.type === "email" && 
                             <p className="error">{error.message}</p>
                         }
@@ -75,14 +75,14 @@ function Login({setShowLogin}){
                 
                     <div className="form-control">
                         <label htmlFor="password" >Wachtwoord</label>
-                        <input className="form-input" name="password" type="password" required placeholder="Wachtwoord" value={userInfo.password} onChange={onChangeValue} autoComplete="on" />
+                        <input name="password" type="password" required placeholder="Wachtwoord" value={userInfo.password} onChange={onChangeValue} autoComplete="on" />
                         {error.type === "password" && 
                             <p className="error">{error.message}</p>
                         }
                     </div>
 
                     <div className="form-control">
-                        <button className="button primary fullwidth" type="submit">Login</button>
+                        <button className="button primary fullwidth mg-t" type="submit">Login</button>
                     </div>
                 </form>
                 <div className="below-form">

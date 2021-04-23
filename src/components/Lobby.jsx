@@ -26,11 +26,11 @@ function Lobby() {
     return (
         <main className="container inner main-lobby">
         <div className='lobby-container'>
-            <div className='lobby-panel'>
+            {/* <div className='lobby-panel-left'> */}
                     {showLogin && <Login setShowLogin={setShowLogin} />}
                     {!showLogin && <Register setShowLogin={setShowLogin} />}
-            </div>
-            <div className="demo-wrap">
+            {/* </div> */}
+            <div className="lobby-panel-right">
                 <p>Log in met een van de demo accounts</p>
                 <button className="button primary padded" onClick={() => demoLogin()}>
                     Demo

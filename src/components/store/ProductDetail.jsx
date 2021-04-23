@@ -65,92 +65,92 @@ function ProductDetail() {
     return (
         <main className="container inner">
         <div className="back-to-store">
-            <Link className="button secondary center" to="/"><BiChevronLeft size="22" /> Back to all products</Link>
+            <Link className="button secondary center" to="/"><BiChevronLeft size="22" />Back to all products</Link>
         </div>
         <div className="product-detail-wrap">
-        <div className="product-heading">
-            <p className="product-name" >{product.name}</p>
-        </div>
-        {product && 
-        <>
-        <div className="product-detail" key={product.id} >
-            <div className="product-image">
-                <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
+            <div className="product-detail-heading">
+                <h1 className="product-name" >{product.name}</h1>
             </div>
-            <div className="product-detail-extra">
-                <div className="top-info">
-                    {product.price && <div className="product-price">
-                    <span className="eurosign">€</span>
-                    <span>{product.price.slice(0,-3)}</span>
-                    <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
-                </div>}
-                <div className="rating">
-                    <p className="product-rating">Rating: {product.rating && product.rating.slice(0,-1)} / 5</p>
+            {product && 
+            <>
+            <div className="product-detail-basic" key={product.id} >
+                <div className="product-image">
+                    <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
                 </div>
-                <div className="delivery">
-                    <p className={product.in_stock ? "product-stock in-stock" : "product-stock not-in-stock"}>
-                    {product.in_stock ? "op voorraad" : "tijdelijk niet leverbaar"}
-                    </p>
-                    <p className="delivery-info">
-                    {product.in_stock && "De bezorgtijd voor dit product is 1 - 2 dagen."}
-                    {!product.in_stock && `Binnen ${product.in_stock_weeks} ${product.in_stock_weeks === 1 ? "week" : "weken"} terug in voorraad`}
-                    </p>
-                </div>               
-                <div className="service-checklist">
-                    <p className=""><FaCheck size="14" /><span>gratis verzending</span></p>
-                    <p className=""><FaCheck size="14" /><span>30 dagen retourgarantie</span></p>
-                </div>
-                </div> 
-                <div className="cart-wrap">
-                    {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
-                    {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
-                    {item && item.count > 0 && 
-                    <>
-                    <div className="item-added">
-                            <div className="cart-check">
-                            <span className="circular-icon"><FaCheck size="16" /></span> 
-                            <p>In winkelwagen</p>
-                            </div>
-                            <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash className="mg-r" size="18" />Verwijder</button>
+                <div className="product-detail-extra">
+                    <div className="top-info">
+                        {product.price && <div className="product-price">
+                        <span className="eurosign">€</span>
+                        <span>{product.price.slice(0,-3)}</span>
+                        <span>{product.price.slice(-2) !== "00" && "," + product.price.slice(-2)}</span>
+                    </div>}
+                    <div className="rating">
+                        <p className="product-rating">Rating: {product.rating && product.rating.slice(0,-1)} / 5</p>
                     </div>
-                    <div className="item-count">
-                        <span>Aantal</span>
-                        <select value={item.count} onChange={(e) => {updateCartItem(item, e.target.value)}}>
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                            <option value={9}>9</option>
-                            <option value={10}>10</option>
-                        </select>
+                    <div className="delivery">
+                        <p className={product.in_stock ? "product-stock in-stock" : "product-stock not-in-stock"}>
+                        {product.in_stock ? "op voorraad" : "tijdelijk niet leverbaar"}
+                        </p>
+                        <p className="delivery-info">
+                        {product.in_stock && "De bezorgtijd voor dit product is 1 - 2 dagen."}
+                        {!product.in_stock && `Binnen ${product.in_stock_weeks} ${product.in_stock_weeks === 1 ? "week" : "weken"} terug in voorraad`}
+                        </p>
+                    </div>               
+                    <div className="service-checklist">
+                        <p className=""><FaCheck size="14" /><span>gratis verzending</span></p>
+                        <p className=""><FaCheck size="14" /><span>30 dagen retourgarantie</span></p>
                     </div>
-                    </>}
+                    </div> 
+                    <div className="cart-wrap">
+                        {!item && <button className="button primary center addtocart" onClick={() => createCart(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
+                        {item && item.count === 0 && <button className="button primary center addtocart" onClick={() => addCartItem(product.id)}>Voeg toe<FaShoppingCart className="mg-l" size="20" /></button>}
+                        {item && item.count > 0 && 
+                        <>
+                        <div className="item-added">
+                                <div className="cart-check">
+                                <span className="circular-icon"><FaCheck size="16" /></span> 
+                                <p>In winkelwagen</p>
+                                </div>
+                                <button className="button secondary center" onClick={() => deleteCartItem(item)}><FaTrash className="mg-r" size="18" />Verwijder</button>
+                        </div>
+                        <div className="item-count">
+                            <span>Aantal</span>
+                            <select value={item.count} onChange={(e) => {updateCartItem(item, e.target.value)}}>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                                <option value={6}>6</option>
+                                <option value={7}>7</option>
+                                <option value={8}>8</option>
+                                <option value={9}>9</option>
+                                <option value={10}>10</option>
+                            </select>
+                        </div>
+                        </>}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="product-detail-content">
-            <p className="description">
-                {product.description}
-            </p>
-            <div className="specs">
-                <h2>Technische specificaties</h2>
-                <table>
-                {product.prod_spec && product.prod_spec.map(spec => {
-                    return (
-                    <>
-                    <tr>
-                    <td>{spec.type_id.type}</td><td>{spec.value}</td>
-                    </tr>
-                    </>
-                    )
-                })}
-                </table>
+            <div className="product-detail-content">
+                <p className="description">
+                    {product.description}
+                </p>
+                <div className="specs">
+                    <h2>Technische specificaties</h2>
+                    <table>
+                    <tbody>
+                    {product.prod_spec && product.prod_spec.map(spec => {
+                        return (
+                        <tr key={spec.id}>
+                        <td>{spec.type_id.type}</td><td>{spec.value}</td>
+                        </tr>
+                        )
+                    })}
+                    </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
         </>
         }
         </div>

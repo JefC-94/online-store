@@ -124,7 +124,7 @@ function ProductFilter() {
 
     return (
         <div className="filter-container">
-            <div className="results-wrap">
+            <div className="results-count">
                 <p>{filteredProducts.length + (filteredProducts.length === 1 ? " resultaat" : " resultaten")}</p>
                 {(filters.brands.length > 0 || filters.categories.length > 0 || filters.name || filters.in_stock) && 
                 <button className="link" onClick={() => resetAllButSorting()}><FaTimes size="14" /> Wis filters</button>}
@@ -134,7 +134,7 @@ function ProductFilter() {
             }
             {showFilters &&
             <div ref={productFilters} className="product-filters">
-                {windowWidth < 900 && <button className="button primary center toggle-filters" onClick={() => setShowFilters(prevVal => !prevVal)}>{showFilters ? "Verberg" : "Toon"} filters</button>}
+                {windowWidth < 900 && <button className="button primary fullwidth mg-t" onClick={() => setShowFilters(prevVal => !prevVal)}>{showFilters ? "Verberg" : "Toon"} filters</button>}
                 <div className="filter-wrap">
                     <h3>Zoek op naam</h3>
                     <div className="filter-control">
@@ -174,7 +174,7 @@ function ProductFilter() {
             </div>
             }
             {windowWidth < 900 &&
-            <button className="button primary center toggle-filters" onClick={() => setShowFilters(true)}>{showFilters ? "Verberg" : "Toon"} filters</button>
+            <button className="button primary fullwidth" onClick={() => setShowFilters(true)}>{showFilters ? "Verberg" : "Toon"} filters</button>
             }
         </div>
     )

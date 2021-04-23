@@ -74,7 +74,7 @@ function Register({setShowLogin}){
     
     if(!isAuth){
         return(
-            <div className="panel-register">
+            <div className="lobby-panel-left panel-register">
                 <h1 className="lobby">Registreer</h1>
                 
                 <form id="register-form" onSubmit={submitForm} noValidate>

@@ -1,12 +1,13 @@
 html, body{
     font: normal 100%/1.4 $hoofdfont;
     color:var(--primaryTextColor);
-    max-height:100vh;
+    height:100vh;
     overflow-x:hidden;
 }
 
 #root{
     min-height:100vh;
+    height:100%; //needed for product-container height
     @include flex(column, flex-start, flex-start);
 }
 
@@ -34,8 +35,13 @@ html, body{
     }
 }
 
-header{
+header, main, footer{
     width:100%;
+}
+
+// ***** HEADER STYLING ******* //
+
+header{
     height:70px;
     background:var(--accentColor);
     
@@ -54,7 +60,7 @@ header{
             a{
                 display:block;
 
-                svg{
+                svg.storelogo{
                     height:45px;
                 }
             }
@@ -96,41 +102,39 @@ header{
 @media screen and (max-width: $smallscreen){
 
     header{
+        font-size:14px;
 
         .container{
-
             .header-left{
-                
-                svg{
-                    height:35px;
+                a{
+                    svg.storelogo{
+                        height:35px;
+                    }
                 }
             }
 
             .header-right{
-                
                 .cart{
-                    margin-right:1em;
+                    margin:0 1.5em 0 1em;
                 }
             }
         }
     }
 }
 
+// ****** MAIN AND FOOTER STYLING ******* //
+
 main{
-    width:100%;
     flex:1;
 }
 
 footer{
-    width:100%;
     min-height:50px;
     @include flex(row, center, center);
     border-top:1px solid var(--secondaryBgColor);
-
-    p, a, span{
-        font-size:14px;
-    }
+    font-size:14px;
 }
+
 
 //**** SOME GENERAL ELEMENTS *****//
 
