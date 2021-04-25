@@ -32,14 +32,14 @@ function Login({setShowLogin}){
         if(!userInfo.email){
             setError({
                 type: "email",
-                message: 'Please fill in your email.'
+                message: 'Vul een e-mailadres in'
             });
             return;
         }
         if(!userInfo.password){
             setError({
                 type: "password",
-                message: "Please fill in your password."
+                message: "Vul een wachtwoord in"
             });
             return;
         }

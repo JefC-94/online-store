@@ -1,6 +1,7 @@
 import React, {useContext,useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {UserContext} from '../../contexts/UserContext';
+import {axiosObject} from '../../Constants';
 
 function Register({setShowLogin}){
     
@@ -24,21 +25,21 @@ function Register({setShowLogin}){
         if(!userInfo.username){
             setError({
                 type: "username",
-                message:'Whoops! Please fill in a username.'
+                message:'Vul een gebruikersnaam in'
             });
             return;
         }
         if(!userInfo.email){
             setError({
                 type: "email",
-                message: 'Please fill in an email.'
+                message: 'Vul een e-mailadres in'
             });
             return;
         }
         if(!userInfo.password){
             setError({
                 type: "password",
-                message: "Please fill in a password."
+                message: "Vul een wachtwoord in"
             });
             return;
         }
@@ -46,13 +47,20 @@ function Register({setShowLogin}){
         const data = await registerUser(userInfo);
         if(data.success){
             //setUserInfo({...initialState});
-            console.log(data.message);
+            console.log(data);
+            const timestamp = Math.floor(new Date().getTime() / 1000 );
+            const request1 = await axiosObject.post(`/cart`, {
+                user_id: +data.success,
+                created_at: timestamp
+            });
+            console.log(request1.status);
             const login = await loginUser(userInfo);
             if(login.success && login.token){
                 //setUserInfo({...initialState});
                 localStorage.setItem('loginToken', login.token);
                 await isLoggedIn();
             }
+            
         }
         else{
             setError({
