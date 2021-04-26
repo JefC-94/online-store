@@ -35,7 +35,7 @@ function Header() {
                     </div>
                     <button className="white" id="logoutBtn" onClick={logoutUser}>Log uit</button>
                 </div>}
-                {!isAuth && <Link className="white" to="/lobby">Login</Link>}
+                {!isAuth && <Link className="white" to="/lobby">Inloggen</Link>}
                 </div>   
             </div>    
         </header>

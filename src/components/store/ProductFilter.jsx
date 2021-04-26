@@ -61,8 +61,8 @@ function ProductFilter() {
     //User clicks on overlay (out of filters-panel) -> hide filters
     useLayoutEffect(() => {
         const handleWindowClick = (e) => {
-            /* console.log(overlay.current);
-            console.log(e.target); */
+            console.log(overlay.current);
+            console.log(e.target);
             if(windowWidth < 900){
                 if(e.target === overlay.current){
                     setShowFilters(false);

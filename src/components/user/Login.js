@@ -63,7 +63,7 @@ function Login({setShowLogin}){
 
         return(
             <div className="lobby-panel-left panel-login">
-                <h1 className="lobby">Login</h1>
+                <h1 className="lobby">Inloggen</h1>
                 <form  id="login-form" onSubmit={submitForm} noValidate>
                     <div className="form-control">
                         <label htmlFor="email" >E-mail</label>
@@ -82,7 +82,7 @@ function Login({setShowLogin}){
                     </div>
 
                     <div className="form-control">
-                        <button className="button primary fullwidth mg-t" type="submit">Login</button>
+                        <button className="button primary fullwidth mg-t" type="submit">Inloggen</button>
                     </div>
                 </form>
                 <div className="below-form">

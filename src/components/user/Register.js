@@ -83,7 +83,7 @@ function Register({setShowLogin}){
     if(!isAuth){
         return(
             <div className="lobby-panel-left panel-register">
-                <h1 className="lobby">Registreer</h1>
+                <h1 className="lobby">Registreren</h1>
                 
                 <form id="register-form" onSubmit={submitForm} noValidate>
                     
@@ -112,7 +112,7 @@ function Register({setShowLogin}){
                     </div>
 
                     <div className="form-control">
-                        <button className="button primary fullwidth" type="submit">Sign Up</button>
+                        <button className="button primary fullwidth" type="submit">Registreren</button>
                     </div>
                 </form>
 
