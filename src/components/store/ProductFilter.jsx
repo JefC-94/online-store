@@ -47,7 +47,10 @@ function ProductFilter() {
             }, 400);
             setShowAlert(true);
         } else {
-            setFilters(prevVal => ({...prevVal, name: null}));
+            setTimeout(() => {
+                setFilters(prevVal => ({...prevVal, name: null}));
+            }, 400);
+            setShowAlert(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputField]);
@@ -61,10 +64,9 @@ function ProductFilter() {
     //User clicks on overlay (out of filters-panel) -> hide filters
     useLayoutEffect(() => {
         const handleWindowClick = (e) => {
-            console.log(overlay.current);
-            console.log(e.target);
             if(windowWidth < 900){
                 if(e.target === overlay.current){
+                    console.log("if statement was true");
                     setShowFilters(false);
                 }
             }
