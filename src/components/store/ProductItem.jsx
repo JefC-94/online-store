@@ -53,13 +53,13 @@ function ProductItem({product}) {
 
     return (
         <div className="product-list-item" key={product.id} >
-            {windowWidth < 520 && <Link className="product-name" to={`/product/${product.id}`}>{product.name}</Link>}
+            {windowWidth < 520 && <Link className="product-name" to={`/product/${product.slug}`}>{product.name}</Link>}
             <div className="list-item-img">
                 <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
             </div>
             <div className="list-item-info">
                 <div className="list-item-content">
-                    {windowWidth > 520 && <Link className="product-name" to={`/product/${product.id}`}>{product.name}</Link>}
+                    {windowWidth > 520 && <Link className="product-name" to={`/product/${product.slug}`}>{product.name}</Link>}
                     <p className="product-specs">
                         {product.prod_spec.map((spec, index, array) => {
                             return (

@@ -43,7 +43,7 @@ function Home(){
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/about' component={About} />
                 <Route path='/cart' component={Cart} />
-                <Route path='/product/:id' component={ProductDetail} />
+                <Route path='/product/:slug' component={ProductDetail} />
             </Switch>
             <Footer></Footer>
         </BrowserRouter>

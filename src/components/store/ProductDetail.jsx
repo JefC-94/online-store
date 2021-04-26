@@ -9,7 +9,7 @@ import {BiChevronLeft} from 'react-icons/bi';
 
 function ProductDetail() {
 
-    const {id} = useParams();
+    const {slug} = useParams();
 
     const {rootState} = useContext(UserContext);
     const {theUser} = rootState;
@@ -48,8 +48,8 @@ function ProductDetail() {
     }, [product, cart]);
 
     async function getProduct(){
-        const request = await axiosObject(`/product/${id}?join=prod_spec,spec`);
-        setProduct(request.data);
+        const request = await axiosObject(`/product?join=prod_spec,spec&filter=slug,eq,${slug}`);
+        setProduct(request.data.records[0]);
     }
 
     async function getItem(){
