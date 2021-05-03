@@ -65,7 +65,7 @@ function ProductList() {
                 </div>}
             </div>
             
-            {pageLimit > 2 && <div className="below-list">
+            {(pageLimit > 2 && currentProducts.length !== 0 ) && <div className="below-list">
                 <Pagination pageData={pageData} pageLimit={pageLimit} setPageLimit={setPageLimit} goToPage={goToPage} />
             </div>}
             </>
