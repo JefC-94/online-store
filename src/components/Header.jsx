@@ -28,14 +28,14 @@ function Header() {
                     
                     <Link className="white center" to="/cart"><span>{cart && cart.length}</span><FaShoppingCart className="mg-l" size="20" /></Link>
                 </div>
-                {isAuth && <div className="user-info">
+                {/* {isAuth && <div className="user-info">
                     <div className="username">
                         <p className="username">{theUser.username}</p>
                         <FaUser size="18" />
                     </div>
                     <button className="white" id="logoutBtn" onClick={logoutUser}>Log uit</button>
                 </div>}
-                {!isAuth && <Link className="white" to="/lobby">Inloggen</Link>}
+                {!isAuth && <Link className="white" to="/lobby">Inloggen</Link>} */}
                 </div>   
             </div>    
         </header>

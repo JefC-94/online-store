@@ -20,7 +20,7 @@ function About() {
                 
                 <div className="about-block">
                     <p>
-                        Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Een ingelogde gebruiker heeft zijn persoonlijke shopping cart dat hij kan raadplegen via zijn account.
+                        De referentie naar de shopping cart wordt bijgehouden in de local storage.
                     </p>
                 </div>
 
@@ -30,7 +30,6 @@ function About() {
                     </p>
                     <ul>
                         <li><a className="link" href="https://github.com/mevdschee/php-crud-api" target="_blank" rel="noreferrer">PHP-CRUD-API</a> door mvedschee</li>
-                        <li><a className="link" href="https://www.w3jar.com/php-login-and-registration-restful-api/" target="_blank" rel="noreferrer">PHP Login system</a> door w3jar</li>
                     </ul>
                 </div>
 
