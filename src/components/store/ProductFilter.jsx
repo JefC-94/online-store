@@ -30,6 +30,10 @@ function ProductFilter() {
 
     useEffect(() => {
         getBrandsAndCats();
+        return () => {
+            setBrands([]);
+            setCategories([]);
+        }
     }, []);
 
     //when window width goes above 900, make sure to show filters by default

@@ -5,6 +5,7 @@ import {UserContext} from '../../contexts/UserContext';
 import {WindowContext} from '../../contexts/WindowContext';
 import {imgPath} from '../../Constants';
 import {FaTrash, FaCheck, FaShoppingCart} from 'react-icons/fa';
+import slugify from 'slugify';
 
 function ProductItem({product}) {
     //item is the sel_order_item if there is one
@@ -53,13 +54,14 @@ function ProductItem({product}) {
 
     return (
         <div className="product-list-item" key={product.id} >
-            {windowWidth < 520 && <Link className="product-name" to={`/product/${product.slug}`}>{product.name}</Link>}
+            {windowWidth < 520 && 
+            <Link className="product-name" to={`/product/${product.id}/${slugify(product.name)}`}>{product.name}</Link>}
             <div className="list-item-img">
                 <img src={`${imgPath}/${product.photo_url}`} alt={product.name} />
             </div>
             <div className="list-item-info">
                 <div className="list-item-content">
-                    {windowWidth > 520 && <Link className="product-name" to={`/product/${product.slug}`}>{product.name}</Link>}
+                    {windowWidth > 520 && <Link className="product-name" to={`/product/${product.id}/${slugify(product.name)}`}>{product.name}</Link>}
                     <p className="product-specs">
                         {product.prod_spec.map((spec, index, array) => {
                             return (
