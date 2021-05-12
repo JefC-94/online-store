@@ -5,9 +5,9 @@ Deze e-commerce website werd gebouwd en gestijld door Jef Ceuppens, als onderdee
 Alle producten en merken zijn fictief en dienen louter als voorbeeld.
 
 
-Voor niet ingelogde bezoekers wordt de referentie naar de shopping cart bijgehouden in de local storage. Om de bestelling te bevestigen moet de bezoeker een account aanmaken.
+De referentie naar de shopping cart bijgehouden in de local storage.
 
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
+[www.fantastic-store.be](https://fantastic-store.be)
 
 ## Backend
 
